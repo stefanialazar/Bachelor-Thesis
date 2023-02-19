@@ -1,0 +1,26 @@
+<div class="page">
+    <h2>Choose the product</h2>
+    
+    <div class="parent">
+      <img class="image" src="{{product?.imageURL}}">
+      <img id="notebook" src="../../assets/products/notebook.png">
+      <img id="hoodie" src="../../assets/products/hoodie.png">
+      <img id="tshirt" src="../../assets/products/tshirt.png">
+
+      <div class="buttons">
+        <app-buttons [buttonText]="'tshirt'" (click)="showTshirt()"></app-buttons>
+        <app-buttons [buttonText]="'hoodie'" (click)="showHoodie()"></app-buttons>
+        <app-buttons [buttonText]="'notebook'" (click)="showNotebook()"></app-buttons>
+      </div>
+    </div>
+
+
+
+    <app-messages *ngIf = "PressedAdd && LoggedIn" [mesId]="'success'"></app-messages>
+    <app-messages *ngIf = "PressedAdd && !LoggedIn" [mesId]="'warning'"></app-messages>
+
+    <div class="buttons2">
+      <app-buttons [buttonText]="'Add to Cart'" (click)="addToCart()"></app-buttons>
+      <app-buttons id="hidden"></app-buttons>
+    </div>
+</div>

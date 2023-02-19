@@ -1,0 +1,13 @@
+<div class="page">
+
+  <h1>Click on the image to choose your merch</h1>
+
+  <div class="container">
+    <ul class="image-gallery">
+      <li *ngFor="let product of images" [routerLink]="['/products', product.imageID]">
+        <img src="{{product.imageURL}}" alt="???" >
+        <div class="overlay"><span class="fa fa-plus"></span></div>
+      </li>
+    </ul>
+  </div>
+</div>

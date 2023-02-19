@@ -1,0 +1,26 @@
+<div class="page">
+	<div class="box">
+		<form autocomplete="off">
+			<span class="text-center">register</span>
+			<div class="input-container">
+				<input id="firstName" type="text" required=""/>
+				<label>First Name</label>		
+			</div>
+			<div class="input-container">
+				<input id="lastName" type="text" required=""/>
+				<label>Last Name</label>		
+			</div>
+		<div class="input-container">
+			<input id="username" type="email" required=""/>
+			<label>Email</label>		
+		</div>
+		<div class="input-container">		
+			<input id="pw" type="password" required=""/>
+			<label>Password</label>
+		</div>
+		<app-buttons [buttonText]="'Register'" (click)="submitRegister()" id="button"></app-buttons>
+	</form>	
+	</div>
+</div>
+
+

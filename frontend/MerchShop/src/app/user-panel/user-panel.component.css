@@ -1,0 +1,19 @@
+.page{
+    margin-left: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+    color : #182d28;
+    font-family: Lora;
+}
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    right:50px;
+    top:100px;
+}

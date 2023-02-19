@@ -1,0 +1,18 @@
+<div class="page">
+	<div class="box">
+		<form>
+			<span class="text-center">login</span>
+		<div class="input-container">
+			<input id="username" type="email" required=""/>
+			<label>Email</label>		
+		</div>
+		<div class="input-container">		
+			<input id="pw" type="password" required=""/>
+			<label>Password</label>
+		</div>
+		<app-buttons [buttonText]="'Login'" (click)="submitLogin()" id="button"></app-buttons>
+	</form>	
+	</div>
+</div>
+
+

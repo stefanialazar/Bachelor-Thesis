@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: 'Lora';
+    src: url('assets/Lora-VariableFont_wght.ttf');
+  }
+
+  @font-face {
+    font-family: 'LoraItalic';
+    src: url('assets/Lora-Italic-VariableFont_wght.ttf');
+  }
+
+html {
+  background:  #FAF9F6;
+}
