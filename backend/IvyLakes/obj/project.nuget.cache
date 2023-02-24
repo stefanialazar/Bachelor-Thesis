@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AooxtED25AfIfPU+bQXmJbKRBVEIxLnkFmGc7fBDLVDRc4AK5v/fUw/gzCGu+QcBvgufLeIwTudUpWST0709qg==",
+  "dgSpecHash": "1a5xiSCa3OxgG2bbYoyVqigQSShoaAauiKNLtl7ZFlMpx2pPwW8DiJNuhOGsOMUzpMO1ADFs/1ap6d9BvX4f8Q==",
   "success": true,
-  "projectFilePath": "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\backend\\IvyLakes\\IvyLakes.csproj",
+  "projectFilePath": "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\Bachelor-Thesis\\backend\\IvyLakes\\IvyLakes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\stefi\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\stefi\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

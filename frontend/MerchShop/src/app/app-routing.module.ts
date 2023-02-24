@@ -7,10 +7,14 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { CartComponent } from './cart/cart.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { SeriesComponent } from './series/series.component';
+import { TrackSeriesComponent } from './track-series/track-series.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'series', component:SeriesComponent},
+  {path: 'series/:id', component: TrackSeriesComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'products/:id', component: CreateProductComponent},
   {path: 'cart', component: CartComponent},

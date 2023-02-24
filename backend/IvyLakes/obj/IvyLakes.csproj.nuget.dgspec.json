@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\backend\\IvyLakes\\IvyLakes.csproj": {}
+    "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\Bachelor-Thesis\\backend\\IvyLakes\\IvyLakes.csproj": {}
   },
   "projects": {
-    "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\backend\\IvyLakes\\IvyLakes.csproj": {
+    "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\Bachelor-Thesis\\backend\\IvyLakes\\IvyLakes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\backend\\IvyLakes\\IvyLakes.csproj",
+        "projectUniqueName": "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\Bachelor-Thesis\\backend\\IvyLakes\\IvyLakes.csproj",
         "projectName": "IvyLakes",
-        "projectPath": "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\backend\\IvyLakes\\IvyLakes.csproj",
+        "projectPath": "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\Bachelor-Thesis\\backend\\IvyLakes\\IvyLakes.csproj",
         "packagesPath": "C:\\Users\\stefi\\.nuget\\packages\\",
-        "outputPath": "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\backend\\IvyLakes\\obj\\",
+        "outputPath": "D:\\FMI\\ANUL_3_INFO\\SEM_I\\ANGULAR\\IvyLakes\\clothesShop\\Bachelor-Thesis\\backend\\IvyLakes\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\stefi\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,0 +1,13 @@
+<div class="page">
+
+    <h1>SERIES PAGE</h1>
+  
+    <div class="container">
+      <ul class="image-gallery">
+        <li *ngFor="let s of series" [routerLink]="['/series', s.seriesID]">
+          <img [attr.src]="(s.seriesImageURL)" alt="???" >
+          <div class="overlay"><span>{{s.seriesID}}</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>

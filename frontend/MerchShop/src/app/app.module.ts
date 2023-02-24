@@ -12,6 +12,8 @@ import { CartComponent } from './cart/cart.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ProductModule } from './products/products.module';
+import { SeriesComponent } from './series/series.component';
+import { TrackSeriesComponent } from './track-series/track-series.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { ProductModule } from './products/products.module';
     CartComponent,
     UserPanelComponent,
     WelcomeComponent,
+    SeriesComponent,
+    TrackSeriesComponent,
     
   ],
   imports: [
