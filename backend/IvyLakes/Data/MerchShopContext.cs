@@ -15,7 +15,8 @@ namespace IvyLakes.Data
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Image> Images { get; set; }
-
         public DbSet<Series> TvSeries { get; set; }
+        public DbSet<SeriesSeasons> SeriesSeasons { get; set; }
+        public DbSet<UserSeries> UserSeries { get; set; }
     }
 }

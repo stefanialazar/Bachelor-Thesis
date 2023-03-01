@@ -1,0 +1,28 @@
+.navbar {
+    overflow: hidden;
+    background-color: #182d28;
+    position: fixed;
+    top: 0;
+    left:30px;
+    width: 100%; 
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+  
+  .navbar a {
+    color: #9dc6c2;
+    padding: 14px 100px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: all 0.5s ease;
+    
+  }
+  
+  .navbar a:hover {
+    background: #9dc6c2;
+    color: #182d28;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 50px;
+  }

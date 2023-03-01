@@ -1,4 +1,22 @@
 <div class="page">
-    <p>track show here </p>
-    <img class="image" src="{{product?.seriesImageURL}}">
+    <div class="container">
+
+        <img class="image" [attr.src]="(series.seriesImageURL)">
+
+        <div class="text">
+            <h2>{{series.seriesTitle}}</h2>
+            <p>{{series.yearReleased}}, {{series.imdbRating}}, {{series.genre}}</p>
+            <h4>{{series.description}}</h4>
+            <p>Streaming Platforms: {{series.streamingPlatform}}</p>
+        </div>
+    </div> 
 </div>
+
+<div class="container-seasons">
+    <ul class="image-gallery">
+        <li *ngFor="let ss of seriesSeasonsList">
+          <div class="overlay"><span>Season {{ss.airedSeason}}, {{ss.airedEpisodes}} </span></div>
+        </li>
+    </ul>
+</div>
+

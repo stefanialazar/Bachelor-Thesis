@@ -14,6 +14,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ProductModule } from './products/products.module';
 import { SeriesComponent } from './series/series.component';
 import { TrackSeriesComponent } from './track-series/track-series.component';
+import { NavigateEpisodesComponent } from './navigate-episodes/navigate-episodes.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { TrackSeriesComponent } from './track-series/track-series.component';
     WelcomeComponent,
     SeriesComponent,
     TrackSeriesComponent,
+    NavigateEpisodesComponent,
     
   ],
   imports: [
