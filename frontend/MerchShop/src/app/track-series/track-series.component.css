@@ -9,15 +9,24 @@
 }
 
 .container {
-    top : 0;
-	border: 3px solid #182d28;;
+    top : 0px;
+	border: 3px solid #182d28;
     border-radius: 10px 100px / 120px;
 	padding: 20px 40px 40px;
 	max-width: 800px;
 	display: flex;
     justify-content: center;
-    background-color: #9dc6c2;
+    background-color: #182d28;
 
+}
+
+.container2 {
+    margin-top: 15px;
+	border: 3px solid #182d28;;
+    border-radius: 10px 100px / 120px;
+	padding: 10px 20px 20px;
+	max-width: 800px;
+    background-color:  #182d28;
 }
 
 .image {
@@ -29,9 +38,41 @@
 }
 
 .text {
+    color: #fff;
     display: inline-block;
 		width: 46%;
 		@media (max-width: 620px) {
 			width: 100%;
 		}
+}
+
+p{
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    text-align: center
+}
+
+select{
+    width: 350px;
+    outline: none;
+    border: 1px solid  #182d28;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
+    cursor: pointer;
+}
+
+select:focus,
+select:hover{
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.329);
+}
+
+.episodes {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
 }

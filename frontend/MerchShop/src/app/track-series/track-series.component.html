@@ -12,11 +12,25 @@
     </div> 
 </div>
 
-<div class="container-seasons">
-    <ul class="image-gallery">
-        <li *ngFor="let ss of seriesSeasonsList">
-          <div class="overlay"><span>Season {{ss.airedSeason}}, {{ss.airedEpisodes}} </span></div>
-        </li>
-    </ul>
+<div class="page">
+
+    <div class="container2">
+        <select name="menu" id="meun-items" (change)="selectSeason($event)">
+            <option disabled selected>Select Season</option>
+            <option class="item" *ngFor="let ss of seriesSeasonsList">Season {{ss.airedSeason}}</option>
+        </select>
+    </div>
 </div>
+
+<div class="page">
+    <div *ngFor="let ss of seriesSeasonsList;">
+        <div class="episodes" id="{{ 'season' + ss.airedSeason}}" style="display: none;" >
+            <app-buttons [buttonText]="'Episode ' + (i+1)" *ngFor="let item of [].constructor(ss.airedEpisodes); let i = index" (click)="goToEpisode()"></app-buttons>
+        </div>  
+    </div>
+</div>
+
+
+
+
 

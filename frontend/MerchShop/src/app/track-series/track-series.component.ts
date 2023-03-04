@@ -86,4 +86,22 @@ export class TrackSeriesComponent implements OnInit{
     }
   }
 
+  selectSeason(event : any){
+    for(let i=1; i<=this.seriesSeasonsList.length; i++){
+      const divSeason = (<HTMLInputElement>document.getElementById("season" + i));
+      divSeason.style.display = 'none';
+    }
+
+    var season = event.target.value;
+    var lastChar = season.substr(season.length - 1); // => "no of season"
+    var idOfSeason = "season" + lastChar;
+    
+    const divSeason = (<HTMLInputElement>document.getElementById(idOfSeason));
+    divSeason.style.display = 'flex';
+  }
+
+  goToEpisode(){
+    console.log("hello");
+  }
+
 }
