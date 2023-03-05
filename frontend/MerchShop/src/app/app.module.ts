@@ -15,6 +15,7 @@ import { ProductModule } from './products/products.module';
 import { SeriesComponent } from './series/series.component';
 import { TrackSeriesComponent } from './track-series/track-series.component';
 import { NavigateEpisodesComponent } from './navigate-episodes/navigate-episodes.component';
+import { TrackSeriesEpisodesComponent } from './track-series-episodes/track-series-episodes.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { NavigateEpisodesComponent } from './navigate-episodes/navigate-episodes
     SeriesComponent,
     TrackSeriesComponent,
     NavigateEpisodesComponent,
+    TrackSeriesEpisodesComponent,
     
   ],
   imports: [

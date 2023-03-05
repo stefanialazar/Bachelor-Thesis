@@ -9,12 +9,14 @@ import { UserPanelComponent } from './user-panel/user-panel.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SeriesComponent } from './series/series.component';
 import { TrackSeriesComponent } from './track-series/track-series.component';
+import { TrackSeriesEpisodesComponent } from './track-series-episodes/track-series-episodes.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'series', component:SeriesComponent},
   {path: 'series/:id', component: TrackSeriesComponent},
+  {path: 'series/:id/:seasonepisode', component: TrackSeriesEpisodesComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'products/:id', component: CreateProductComponent},
   {path: 'cart', component: CartComponent},

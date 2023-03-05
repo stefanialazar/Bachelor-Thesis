@@ -5,9 +5,9 @@
 
         <div class="text">
             <h2>{{series.seriesTitle}}</h2>
-            <p>{{series.yearReleased}}, {{series.imdbRating}}, {{series.genre}}</p>
+            <p>Release year: {{series.yearReleased}}<br>IMDB rating: {{series.imdbRating}}<br>Series genre: {{series.genre}}</p>
             <h4>{{series.description}}</h4>
-            <p>Streaming Platforms: {{series.streamingPlatform}}</p>
+            <p>Streaming Platforms: <br> {{series.streamingPlatform}}</p>
         </div>
     </div> 
 </div>
@@ -25,7 +25,7 @@
 <div class="page">
     <div *ngFor="let ss of seriesSeasonsList;">
         <div class="episodes" id="{{ 'season' + ss.airedSeason}}" style="display: none;" >
-            <app-buttons [buttonText]="'Episode ' + (i+1)" *ngFor="let item of [].constructor(ss.airedEpisodes); let i = index" (click)="goToEpisode()"></app-buttons>
+            <app-buttons [buttonText]="'Episode ' + (i+1)" *ngFor="let item of [].constructor(ss.airedEpisodes); let i = index" [routerLink]="['/series', ss.seriesId, 'season' + currentSeason + 'episode' + ((i+1) | number)]"></app-buttons>
         </div>  
     </div>
 </div>

@@ -15,12 +15,13 @@ export class TrackSeriesComponent implements OnInit{
   errorMessage = '';
   series : any;
   seriesSeasonsList : any;
-  id : any;
+  seriesId : any;
   users: any;
   LoggedIn = true;
   userId: string = '';
   firstName: string = '';
   lastName: string = '';
+  currentSeason: string = '';
 
   constructor(private route: ActivatedRoute, private reqS: RequestService, private http: HttpClient) { }
 
@@ -52,15 +53,14 @@ export class TrackSeriesComponent implements OnInit{
 
     this.route.paramMap.subscribe(params => {
 
-      var id = params.get('id');
+      var seriesId = params.get('id');
 
-      this.reqS.get('https://localhost:44341/api/series/' + id).subscribe((res: any) => {
+      this.reqS.get('https://localhost:44341/api/series/' + seriesId).subscribe((res: any) => {
       this.series = res;
       })
 
-      this.reqS.get('https://localhost:44341/api/series-seasons/' + id).subscribe((res: any) => {
+      this.reqS.get('https://localhost:44341/api/series-seasons/' + seriesId).subscribe((res: any) => {
       this.seriesSeasonsList = res;
-      console.log(this.seriesSeasonsList);
       })
     });
 
@@ -93,8 +93,8 @@ export class TrackSeriesComponent implements OnInit{
     }
 
     var season = event.target.value;
-    var lastChar = season.substr(season.length - 1); // => "no of season"
-    var idOfSeason = "season" + lastChar;
+    this.currentSeason = season.substr(season.length - 1); // => "no of season"
+    var idOfSeason = "season" + this.currentSeason;
     
     const divSeason = (<HTMLInputElement>document.getElementById(idOfSeason));
     divSeason.style.display = 'flex';
