@@ -2,9 +2,19 @@
 
     <h1>SERIES PAGE</h1>
   
+    <div class="search">
+      <app-search-bar 
+      class="searchTerm" 
+      type="text" 
+      name="searchTerm" 
+      [(ngModel)]="searchTerm" 
+      (input)="search(searchTerm)" 
+      ngDefaultControl></app-search-bar>
+    </div>
+    
     <div class="container">
       <ul class="image-gallery">
-        <li *ngFor="let s of series" [routerLink]="['/series', s.seriesId]">
+        <li *ngFor="let s of series | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
           <img [attr.src]="(s.seriesImageURL)" alt="???" >
           
           <div class="overlay"><span>{{s.seriesId}}</span></div>

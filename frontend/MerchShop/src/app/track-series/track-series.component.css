@@ -10,7 +10,7 @@
 
 .container {
     top : 0px;
-	border: 3px solid #182d28;
+	border: 3px solid#bec5b3;
     border-radius: 10px 100px / 120px;
 	padding: 20px 40px 40px;
 	max-width: 800px;
@@ -22,7 +22,7 @@
 
 .container2 {
     margin-top: 15px;
-	border: 3px solid #182d28;;
+	border: 3px solid #bec5b3;
     border-radius: 10px 100px / 120px;
 	padding: 10px 20px 20px;
 	max-width: 800px;
@@ -38,7 +38,7 @@
 }
 
 .text {
-    color: #fff;
+    color: #bec5b3;
     display: inline-block;
 		width: 46%;
 		@media (max-width: 620px) {
@@ -47,7 +47,7 @@
 }
 
 p{
-    color: #fff;
+    color: #bec5b3;
     margin-bottom: 0.5rem;
     font-size: 1.4rem;
     text-align: center
