@@ -30,18 +30,10 @@ namespace IvyLakes.Controllers
         [EnableQuery]
         [EnableCors]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("api/user-seasons/{id}")]
-        public async Task<IActionResult> Get([FromRoute] int? id)
+        [HttpGet("api/user-seasons")]
+        public async Task<IActionResult> Get()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var claimsIdentity = this.User.Identity as ClaimsIdentity;
-            var userId = claimsIdentity.FindFirst("id")?.Value;
-
-            var seriesSeasons = await _context.UserSeries.Where(s => s.SeriesId == id ).Where(s => s.UserId.ToString() == userId).ToListAsync();
+            var seriesSeasons = await _context.UserSeries.ToListAsync();
 
             if (seriesSeasons == null)
             {

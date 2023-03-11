@@ -1,7 +1,5 @@
 <div class="page">
-
-    <h1>SERIES PAGE</h1>
-  
+  <div class="container">
     <div class="search">
       <app-search-bar 
       class="searchTerm" 
@@ -11,14 +9,36 @@
       (input)="search(searchTerm)" 
       ngDefaultControl></app-search-bar>
     </div>
-    
-    <div class="container">
+    <div *ngIf="LoggedIn == true">
+      {{findStartedSeries()}}
+      <div class="started">
+        <h2>Keep Watching</h2>
+        <ul class="image-gallery">
+          <li *ngFor="let s of startedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
+            <img [attr.src]="(s.seriesImageURL)" alt="???" >
+            <div class="overlay"><span>{{s.seriesId}}</span></div>
+          </li>
+        </ul>
+      </div>
+      <div class="notstarted">
+        <h2>Not Started Yet</h2>
+        <ul class="image-gallery">
+          <li *ngFor="let s of notStartedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
+            <img [attr.src]="(s.seriesImageURL)" alt="???" >
+            <div class="overlay"><span>{{s.seriesId}}</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div *ngIf="LoggedIn == false">
+      <h2>All Series</h2>
       <ul class="image-gallery">
         <li *ngFor="let s of series | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
           <img [attr.src]="(s.seriesImageURL)" alt="???" >
-          
           <div class="overlay"><span>{{s.seriesId}}</span></div>
         </li>
       </ul>
     </div>
   </div>
+</div>

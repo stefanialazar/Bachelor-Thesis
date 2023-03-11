@@ -42,8 +42,7 @@ export class UserPanelComponent implements OnInit {
       if(error.status = 401) {
        this.LoggedIn = false;
       }
-    }
-    );
+    });
   }
 
   decodeToken(token: string): any {
@@ -52,9 +51,6 @@ export class UserPanelComponent implements OnInit {
     } catch(Error) {
       return null;
     }
-  }
-  convertUTCdate(date: any) {
-    return getUTCdate(date);
   }
 
   login(){
