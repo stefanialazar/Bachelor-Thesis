@@ -85,8 +85,6 @@ export class SeriesComponent implements OnInit{
         }); 
       }
     }
-    console.log(this.startedSeries);
-    console.log(this.notStartedSeries);
   }
 
 
@@ -101,7 +99,6 @@ export class SeriesComponent implements OnInit{
     this.series = this.allSeries.filter((val: { seriesTitle: string; }) =>
       val.seriesTitle.toLowerCase().includes(value)
     );
-    console.log(this.series)
   }
 
 }

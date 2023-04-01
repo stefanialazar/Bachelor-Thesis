@@ -5,10 +5,9 @@ nav ul {
 }
 
 nav ul li {
-    --c:  #182d28;
-    color: var(--c);
+    color: #182d28;
     font-size: 14px;
-    border: 0.3em solid var(--c);
+    border: 0.3em solid #182d28;
     border-radius: 0.8em;
     width: 10em;
     height: 3em;
@@ -26,7 +25,7 @@ nav ul li span {
     position: absolute;
     width: 25%;
     height: 100%;
-    background-color: var(--c);
+    background-color: #182d28;
     transform: translateY(150%);
     border-radius: 50%;
     left: calc((var(--n) - 1) * 25%);

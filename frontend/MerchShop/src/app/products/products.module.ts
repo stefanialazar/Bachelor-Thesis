@@ -6,6 +6,9 @@ import { CreateProductGuard } from '../create-product/create-product.guard';
 import { CommonModule } from '@angular/common';
 import { MessagesComponent } from '../messages/messages.component';
 import { ButtonsComponent } from '../buttons/buttons.component';
+import {SearchFilterPipe} from '../search-filter.pipe';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,8 +16,10 @@ import { ButtonsComponent } from '../buttons/buttons.component';
     CreateProductComponent,
     MessagesComponent,
     ButtonsComponent,
+    SearchFilterPipe,
+    SearchBarComponent,
   ],
-  imports: [ CommonModule,
+  imports: [ FormsModule, CommonModule,
     RouterModule.forChild([
       { path: 'products', component: ProductsComponent },
       {
@@ -24,7 +29,10 @@ import { ButtonsComponent } from '../buttons/buttons.component';
       }
     ]),
   ],
-  exports: [MessagesComponent, ButtonsComponent],
+  exports: [MessagesComponent, 
+    ButtonsComponent,
+    SearchFilterPipe,
+    SearchBarComponent],
 })
 export class ProductModule { }
 

@@ -1,5 +1,5 @@
 <div class="page">
-    <h2>Choose the product</h2>
+    <h2>Customise your product</h2>
     
     <div class="parent">
       <img class="image" src="{{product?.imageURL}}">
@@ -12,14 +12,26 @@
         <app-buttons [buttonText]="'hoodie'" (click)="showHoodie()"></app-buttons>
         <app-buttons [buttonText]="'notebook'" (click)="showNotebook()"></app-buttons>
       </div>
+
+      <div class="colors">
+        <app-buttons class="color" [buttonText]="'green'" [buttonId]="'green'" (click)="filterGreen()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'gold'" [buttonId]="'gold'" (click)="filterGold()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'purple'" [buttonId]="'purple'" (click)="filterPurple()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'red'" [buttonId]="'red'" (click)="filterRed()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'light blue'" [buttonId]="'light-blue'" (click)="filterLightB()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'black'" [buttonId]="'black'" (click)="filterBlack()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'pink'" [buttonId]="'pink'" (click)="filterPink()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'gray'" [buttonId]="'gray'" (click)="filterGray()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'brown'" [buttonId]="'brown'" (click)="filterBrown()"></app-buttons>
+        <app-buttons class="color" [buttonText]="'dark blue'" [buttonId]="'dark-blue'" (click)="filterDarkB()"></app-buttons>
+      </div>
     </div>
-
-
 
     <app-messages *ngIf = "PressedAdd && LoggedIn" [mesId]="'success'"></app-messages>
     <app-messages *ngIf = "PressedAdd && !LoggedIn" [mesId]="'warning'"></app-messages>
 
     <div class="buttons2">
+      <app-buttons id="hidden"></app-buttons>
       <app-buttons [buttonText]="'Add to Cart'" (click)="addToCart()"></app-buttons>
       <app-buttons id="hidden"></app-buttons>
     </div>

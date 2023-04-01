@@ -9,21 +9,35 @@
 .buttons{
     z-index: 1;
     display: flex;
-    justify-content: flex-end;
+    flex-wrap:wrap;
+    justify-content: flex-start;
     position: fixed;
-    right:50px;
+    left:65%;
     top:100px;
 }
 
 .buttons2{
     z-index: 1;
     display: flex;
-    justify-content: flex-end;
+    flex-wrap:wrap;
+    justify-content: flex-start;
     position: fixed;
-    right:50px;
-    top:200px;
+    left:65%;
+    top:800px;
 }
 
+.colors{
+    z-index: 1;
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: flex-start;
+    position: fixed;
+    left:60%;
+    top:400px;
+}
+.color {
+    width: 25%;
+}
 .parent {
     position: relative;
 }

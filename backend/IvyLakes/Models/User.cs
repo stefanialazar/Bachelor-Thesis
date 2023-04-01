@@ -15,5 +15,8 @@ namespace IvyLakes.Models
         public DateTime RegistrationDate { get; set; }
         //public ShoppingCart ShoppingCart { get; set; }
         public int Points { get; set; }
+
+        public string ProfilePicture { get; set; }
+        public string BackgroundPicture { get; set; }
     }
 }

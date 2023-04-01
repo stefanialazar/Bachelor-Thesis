@@ -16,9 +16,7 @@ import { SeriesComponent } from './series/series.component';
 import { TrackSeriesComponent } from './track-series/track-series.component';
 import { NavigateEpisodesComponent } from './navigate-episodes/navigate-episodes.component';
 import { TrackSeriesEpisodesComponent } from './track-series-episodes/track-series-episodes.component';
-import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FormsModule } from '@angular/forms';
-import {SearchFilterPipe} from './search-filter.pipe'
 
 @NgModule({
   declarations: [
@@ -33,11 +31,7 @@ import {SearchFilterPipe} from './search-filter.pipe'
     SeriesComponent,
     TrackSeriesComponent,
     NavigateEpisodesComponent,
-    TrackSeriesEpisodesComponent,
-    SearchBarComponent,
-    SearchFilterPipe,
-    
-  ],
+    TrackSeriesEpisodesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -48,6 +42,6 @@ import {SearchFilterPipe} from './search-filter.pipe'
   ],
 
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

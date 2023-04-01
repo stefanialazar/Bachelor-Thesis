@@ -1,12 +1,23 @@
 <div class="page">
 
-  <h1>PRODUCTS PAGE</h1>
+  <div class="search">
+    <app-search-bar 
+    class="searchTerm" 
+    type="text" 
+    name="searchTerm" 
+    [(ngModel)]="searchTerm" 
+    (input)="search(searchTerm)" 
+    ngDefaultControl></app-search-bar>
+  </div>
+
+  <div class="gradient-border" id="box">Choose a photo to personalise your merch</div>
+  
 
   <div class="container">
     <ul class="image-gallery">
       <li *ngFor="let product of images" [routerLink]="['/products', product.imageID]">
         <img src="{{product.imageURL}}" alt="???" >
-        <div class="overlay"><span class="fa fa-plus"></span></div>
+        <div class="overlay"><span><i class="fal fa-tshirt"></i></span></div>
       </li>
     </ul>
   </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from '../core/request.service';
 import jwt_decode from 'jwt-decode';
-import { getUTCdate } from '../core/helpers/dateHelpers';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -15,6 +14,8 @@ export class UserPanelComponent implements OnInit {
   userId: string = '';
   firstName: string = '';
   lastName: string = '';
+  profilePicture: string = '';
+  backgroundPicture: string = '';
   users: any;
   LoggedIn = true; 
  
@@ -33,9 +34,16 @@ export class UserPanelComponent implements OnInit {
       this.users = res;
       if(token){
         const tokenObject = this.decodeToken(token);
-        this.userId = 'Id: ' + tokenObject.id;
-        this.firstName = 'First name: ' + tokenObject.firstname;
-        this.lastName = 'Last name: ' + tokenObject.lastname;
+        this.userId = tokenObject.id;
+        console.log(this.userId);
+        this.firstName = tokenObject.firstname.charAt(0).toUpperCase() + tokenObject.firstname.slice(1);
+        this.lastName = tokenObject.lastname.charAt(0).toUpperCase() + tokenObject.lastname.slice(1);
+        this.users.forEach((element : any) => {
+          if (element.id == this.userId){
+            this.profilePicture = element.profilePicture;
+            this.backgroundPicture = element.backgroundPicture;
+          }
+        });
       }
     },
     error => {
@@ -53,20 +61,17 @@ export class UserPanelComponent implements OnInit {
     }
   }
 
-  login(){
-    window.location.href = 'http://localhost:4200/login';
-
-  }
-
-  register(){
-    window.location.href = 'http://localhost:4200/register';
-
-  }
-
   logOut() {
     localStorage.removeItem("jwt");
     window.location.href = 'http://localhost:4200/welcome';
- 
+  }
+
+  newProfilePicture(){
+    console.log("new pfp")
+  }
+
+  newBkgPicture(){
+    console.log("new bkg")
   }
 
 }

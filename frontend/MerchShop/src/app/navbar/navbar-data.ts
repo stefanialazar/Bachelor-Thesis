@@ -1,5 +1,10 @@
 export const navbarData = [
     {
+    routeLink: 'welcome',
+    icon: 'fal fa-home',
+    label: 'Home'
+    }, 
+    {
     routeLink: 'series',
     icon: 'fal fa-tv-retro',
     label: 'Series'
@@ -7,7 +12,7 @@ export const navbarData = [
     {
     routeLink: 'products',
     icon: 'fal fa-tshirt',
-    label: 'Products'
+    label: 'Merch'
     },
     {
     routeLink: 'cart',
@@ -18,6 +23,5 @@ export const navbarData = [
     routeLink: 'user',
     icon: 'fal fa-user',
     label: 'Account'
-    },
-    
+    },   
 ];

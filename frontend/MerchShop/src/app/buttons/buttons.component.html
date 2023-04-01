@@ -1,8 +1,8 @@
 <nav>
     <ul>
-        <li>
+        <li (click)="changeColor()">
             {{[buttonText]}}
-            <span></span><span></span><span></span><span></span>
+            <span [attr.class]="buttonId" #buttonColor></span><span [attr.class]="buttonId" #buttonColor></span><span [attr.class]="buttonId" #buttonColor></span><span [attr.class]="buttonId" #buttonColor></span>
         </li>
     </ul>
 </nav>

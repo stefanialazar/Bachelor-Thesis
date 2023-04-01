@@ -1,44 +1,43 @@
 <div class="page">
-  <div class="container">
-    <div class="search">
-      <app-search-bar 
-      class="searchTerm" 
-      type="text" 
-      name="searchTerm" 
-      [(ngModel)]="searchTerm" 
-      (input)="search(searchTerm)" 
-      ngDefaultControl></app-search-bar>
-    </div>
-    <div *ngIf="LoggedIn == true">
-      {{findStartedSeries()}}
-      <div class="started">
-        <h2>Keep Watching</h2>
-        <ul class="image-gallery">
-          <li *ngFor="let s of startedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
-            <img [attr.src]="(s.seriesImageURL)" alt="???" >
-            <div class="overlay"><span>{{s.seriesId}}</span></div>
-          </li>
-        </ul>
-      </div>
-      <div class="notstarted">
-        <h2>Not Started Yet</h2>
-        <ul class="image-gallery">
-          <li *ngFor="let s of notStartedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
-            <img [attr.src]="(s.seriesImageURL)" alt="???" >
-            <div class="overlay"><span>{{s.seriesId}}</span></div>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div *ngIf="LoggedIn == false">
-      <h2>All Series</h2>
+  <div class="search">
+    <app-search-bar 
+    class="searchTerm" 
+    type="text" 
+    name="searchTerm" 
+    [(ngModel)]="searchTerm" 
+    (input)="search(searchTerm)" 
+    ngDefaultControl>
+  </app-search-bar>
+  </div>
+  <div *ngIf="LoggedIn == true">
+    {{findStartedSeries()}}
+    <div class="started">
+      <div class="gradient-border" id="box">Keep Watching</div>
       <ul class="image-gallery">
-        <li *ngFor="let s of series | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
+        <li *ngFor="let s of startedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
           <img [attr.src]="(s.seriesImageURL)" alt="???" >
-          <div class="overlay"><span>{{s.seriesId}}</span></div>
+          <div class="overlay"><span><i class="fal fa-tv-retro"></i></span></div>
         </li>
       </ul>
     </div>
+    <div class="notstarted">
+      <div class="gradient-border" id="box">Not started</div>
+      <ul class="image-gallery">
+        <li *ngFor="let s of notStartedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
+          <img [attr.src]="(s.seriesImageURL)" alt="???" >
+          <div class="overlay"><span><i class="fal fa-tv-retro"></i></span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="LoggedIn == false">
+    <div class="gradient-border" id="box">All Series</div>
+      <ul class="image-gallery">
+        <li *ngFor="let s of series | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
+          <img [attr.src]="(s.seriesImageURL)" alt="???" >
+          <div class="overlay"><span><i class="fal fa-tv-retro"></i></span></div>
+        </li>
+      </ul>
   </div>
 </div>

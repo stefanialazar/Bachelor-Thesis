@@ -1,27 +1,26 @@
 <div class="page">
-    <div class="title">
-    <h1>User panel</h1>
-    </div>
-    <div class="info">
-    <h2></h2>
-    </div>
-    <div class="dataRow1">
-        <h2>{{firstName}} </h2>
-    </div>
-    <div class="dataRow2">
-        <h2>{{lastName}} </h2>
-    </div>
-    <div class="dataRow3">
-        <h2>{{userId}}  </h2>
+
+    <div *ngIf = "!LoggedIn">
+        <div class="gradient-border" id="box">Log In or Register</div>
+        <div class="buttons">
+            <app-buttons [buttonText]="'Log In'" [routerLink]="['/login']"></app-buttons>
+            <app-buttons [buttonText]="'Register'" [routerLink]="['/register']"></app-buttons>
+        </div>
+        <app-messages [mesId]="'warning'"></app-messages>
     </div>
 
-    <div class="buttons">
-        <app-buttons *ngIf = "!LoggedIn" [buttonText]="'Log In'" (click)="login()"></app-buttons>
-        <app-buttons *ngIf = "!LoggedIn" [buttonText]="'Register'" (click)="register()"></app-buttons>
+    <div *ngIf = "LoggedIn">
+        <div class="gradient-border" id="box">{{firstName}} {{lastName}}</div>
+        <div class="profileImg">
+            <img src="{{backgroundPicture}}" alt="???" class="background" (click)="newBkgPicture()">
+            <img src="{{profilePicture}}" alt="???" class="profile" (click)="newProfilePicture()"> 
+        </div>
+        
+        
+        <app-buttons  [buttonText]="'Log Out'" (click)="logOut()"></app-buttons>
     </div>
+    
 
-    <app-buttons *ngIf = "LoggedIn" [buttonText]="'Log Out'" (click)="logOut()"></app-buttons>
-
-    <app-messages *ngIf = "!LoggedIn" [mesId]="'warning'" ></app-messages>
+    
 
 </div>
