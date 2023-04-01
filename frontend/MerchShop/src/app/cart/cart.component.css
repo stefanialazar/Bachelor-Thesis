@@ -47,3 +47,19 @@
     background-position: 0% 50%;
   }
 }
+
+.cart-items {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-items th,
+.cart-items td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+.cart-summary {
+  margin-top: 20px;
+}

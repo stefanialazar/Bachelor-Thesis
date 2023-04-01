@@ -35,7 +35,6 @@ export class UserPanelComponent implements OnInit {
       if(token){
         const tokenObject = this.decodeToken(token);
         this.userId = tokenObject.id;
-        console.log(this.userId);
         this.firstName = tokenObject.firstname.charAt(0).toUpperCase() + tokenObject.firstname.slice(1);
         this.lastName = tokenObject.lastname.charAt(0).toUpperCase() + tokenObject.lastname.slice(1);
         this.users.forEach((element : any) => {
@@ -67,11 +66,40 @@ export class UserPanelComponent implements OnInit {
   }
 
   newProfilePicture(){
-    console.log("new pfp")
+    const token: any= localStorage.getItem("jwt");
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    console.log(this.userId);
+    const newProfilePictureUrl = prompt('Enter the new profile image URL:', '');
+    const object = {
+      UserId: this.userId,
+      ProfilePicture: newProfilePictureUrl,
+    }
+    this.reqS.post('https://localhost:44341/api/users/update-profile-picture', object, { headers }).subscribe((res: any) => {
+      location.reload();
+    })
   }
 
   newBkgPicture(){
-    console.log("new bkg")
+    const token: any= localStorage.getItem("jwt");
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    const newBackgroundPictureUrl = prompt('Enter the new profile image URL:', '');
+    const object = {
+      UserId: this.userId,
+      BackgroundPicture: newBackgroundPictureUrl,
+    }
+    this.reqS.post('https://localhost:44341/api/users/update-background-picture', object, { headers }).subscribe((res: any) => {
+      location.reload();
+    })
+    
   }
+
+  
 
 }

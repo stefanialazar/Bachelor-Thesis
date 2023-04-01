@@ -15,6 +15,12 @@ export class CartComponent implements OnInit {
   displayedColumns: string[] = ['quantity','name', 'price', 'pointsPrice', 'addRemove'];
   totalValue: number = 0;
   totalPointsValue: number = 0;
+  cartItems = [
+    { name: 'T-Shirt', price: 19.99, quantity: 2 },
+    { name: 'Hoodie', price: 39.99, quantity: 1 },
+    { name: 'Jeans', price: 59.99, quantity: 1 },
+  ];
+
   constructor(private reqS: RequestService, private router: Router) { }
 
   ngOnInit(): void {
@@ -71,6 +77,19 @@ export class CartComponent implements OnInit {
     }
    
  ) 
+}
+
+getTotal(): number {
+  return this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+removeFromCart(item: any): void {
+  this.cartItems = this.cartItems.filter(i => i !== item);
+}
+
+checkout(): void {
+  // Implement your checkout logic here
+  alert('Checkout is not implemented yet.');
 }
  
     

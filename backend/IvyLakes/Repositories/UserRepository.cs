@@ -34,5 +34,35 @@ namespace IvyLakes.Repositories
             }
             return user;
         }
+
+        public async Task<User> UpdateBackgroundPicture(Guid UserId, string backgroundPicture)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == UserId);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            user.BackgroundPicture = backgroundPicture;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        public async Task<User> UpdateProfilePicture(Guid UserId, string profilePicture)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == UserId);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            user.ProfilePicture = profilePicture;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
     }
 }

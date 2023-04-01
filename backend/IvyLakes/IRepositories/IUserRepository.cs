@@ -12,5 +12,7 @@ namespace IvyLakes.IRepositories
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser(string email);
         Task<User> AddUser(User user);
+        Task<User> UpdateBackgroundPicture(Guid UserId, string backgroundPicture);
+        Task<User> UpdateProfilePicture(Guid UserId, string profilePicture);
     }
 }

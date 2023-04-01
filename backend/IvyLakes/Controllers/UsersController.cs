@@ -55,7 +55,34 @@ namespace IvyLakes.Controllers
             };
             user = await _userRepo.AddUser(userToAdd);
             return Ok(user);
+        }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("api/users/update-background-picture")]
+        public async Task<IActionResult> UpdateBackgroundPicture([FromBody] UpdateBackgroundPictureDTO updateBackgroundPictureDTO)
+        {
+            var user = await _userRepo.UpdateBackgroundPicture(updateBackgroundPictureDTO.UserId, updateBackgroundPictureDTO.BackgroundPicture);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(user);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("api/users/update-profile-picture")]
+        public async Task<IActionResult> UpdateProfilePicture([FromBody] UpdateBackgroundPictureDTO updateBackgroundPictureDTO)
+        {
+            var user = await _userRepo.UpdateProfilePicture(updateBackgroundPictureDTO.UserId, updateBackgroundPictureDTO.ProfilePicture);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(user);
         }
     }
 }
