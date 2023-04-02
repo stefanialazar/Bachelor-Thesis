@@ -18,5 +18,12 @@ namespace IvyLakes.Data
         public DbSet<Series> TvSeries { get; set; }
         public DbSet<SeriesSeasons> SeriesSeasons { get; set; }
         public DbSet<UserSeries> UserSeries { get; set; }
+        public DbSet<Comments> Comments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Comments>()
+                .HasKey(c => c.CommentID);
+        }
     }
 }

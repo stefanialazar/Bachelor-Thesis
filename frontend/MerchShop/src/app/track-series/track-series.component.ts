@@ -22,6 +22,8 @@ export class TrackSeriesComponent implements OnInit{
   firstName: string = '';
   lastName: string = '';
   currentSeason: string = '';
+  allUserSeries: any;
+  currentUserProgress: any;
 
   constructor(private route: ActivatedRoute, private reqS: RequestService, private http: HttpClient) { }
 
@@ -38,9 +40,7 @@ export class TrackSeriesComponent implements OnInit{
       this.users = res;
       if(token){
         const tokenObject = this.decodeToken(token);
-        this.userId = 'Id: ' + tokenObject.id;
-        this.firstName = 'First name: ' + tokenObject.firstname;
-        this.lastName = 'Last name: ' + tokenObject.lastname;
+        this.userId = tokenObject.id;
       }
     },
     error => {
@@ -62,20 +62,12 @@ export class TrackSeriesComponent implements OnInit{
       this.reqS.get('https://localhost:44341/api/series-seasons/' + seriesId).subscribe((res: any) => {
       this.seriesSeasonsList = res;
       })
-    });
 
-    // this.http.get('https://localhost:44341/api/users', { headers: headers }).subscribe((res: any) => {
-    //   this.users = res;
-    //   if(token){
-    //     console.log("da");
-    //   }
-    // },
-    // error => {
-    //   if(error.status = 401) {
-    //    this.LoggedIn = false;
-    //   }
-    // }
-    // );
+      this.reqS.get('https://localhost:44341/api/user-seasons/' + seriesId).subscribe((res: any) => {
+      this.allUserSeries = res;
+      this.currentUserProgress = this.allUserSeries[0];
+      })
+    });
   }
 
   decodeToken(token: string): any {
@@ -98,10 +90,6 @@ export class TrackSeriesComponent implements OnInit{
     
     const divSeason = (<HTMLInputElement>document.getElementById(idOfSeason));
     divSeason.style.display = 'flex';
-  }
-
-  goToEpisode(){
-    console.log("hello");
   }
 
 }

@@ -12,15 +12,26 @@
     <div *ngIf = "LoggedIn">
         <div class="gradient-border" id="box">{{firstName}} {{lastName}}</div>
         <div class="profileImg">
-            <img src="{{backgroundPicture}}" alt="???" class="background" (click)="newBkgPicture()">
-            <img src="{{profilePicture}}" alt="???" class="profile" (click)="newProfilePicture()"> 
+            <div class="backgroundDiv">
+                <img src="{{backgroundPicture}}" alt="???" class="background">
+                <div class="overlayBkg" (click)="newBkgPicture()"><span>Click here to change your background picture</span></div>
+            </div>
+            <div class="profileDiv">
+                <img src="{{profilePicture}}" alt="???" class="profile"> 
+                <div class="overlay" (click)="newProfilePicture()"><span>Click here to change your profile picture</span></div>
+            </div>
         </div>
+
+        <div class="container">
+            <div class="actions">
+                <app-buttons  [buttonText]="'Change email'" ></app-buttons>
+                <app-buttons  [buttonText]="'Change password'" ></app-buttons>
+                <app-buttons  [buttonText]="'Your orders'" ></app-buttons>
+                <app-buttons  [buttonText]="'Log Out'" (click)="logOut()"></app-buttons>
+            </div>
+        </div>
+
         
         
-        <app-buttons  [buttonText]="'Log Out'" (click)="logOut()"></app-buttons>
     </div>
-    
-
-    
-
 </div>

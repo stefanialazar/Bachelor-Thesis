@@ -27,10 +27,14 @@
 	padding: 10px 20px 20px;
 	max-width: 800px;
     background-color:  #182d28;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .image {
-    border: 2px solid;
+    border: 3px solid #bec5b3;
+    border-radius: 10px 100px / 120px;
     display: inline-block;
     vertical-align: top;
     width: 55%;
@@ -56,18 +60,37 @@ p{
 select{
     width: 350px;
     outline: none;
-    border: 1px solid  #182d28;
+    border: 1px solid #182d28;
     padding: 1rem;
     font-size: 1.1rem;
     border-radius: 0.5rem;
     box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
     cursor: pointer;
+    background-color: #bec5b3;
+    color: #182d28;
+    appearance: none;
+    position: relative;
 }
 
 select:focus,
 select:hover{
     outline: none;
-    border: 1px solid rgba(0, 0, 0, 0.329);
+    border-color: #182d28;
+    box-shadow: 0 0 10px rgba(24, 45, 40, 0.25);
+}
+
+select::-ms-expand {
+    display: none;
+}
+  
+.container2::after {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: #182d28;
+    pointer-events: none;
 }
 
 .episodes {

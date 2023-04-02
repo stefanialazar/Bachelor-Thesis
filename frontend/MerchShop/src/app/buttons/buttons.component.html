@@ -1,10 +1,14 @@
 <nav>
     <ul>
-        <li (click)="changeColor()">
-            {{[buttonText]}}
-            <span [attr.class]="buttonId" #buttonColor></span><span [attr.class]="buttonId" #buttonColor></span><span [attr.class]="buttonId" #buttonColor></span><span [attr.class]="buttonId" #buttonColor></span>
+      <div class="button-container">
+        <li [class]="buttonBkg">
+          {{[buttonText]}}
+          <span [attr.class]="buttonId" #buttonColor></span
+          ><span [attr.class]="buttonId" #buttonColor></span
+          ><span [attr.class]="buttonId" #buttonColor></span
+          ><span [attr.class]="buttonId" #buttonColor></span>
         </li>
+        <span *ngIf="buttonBkg === 'watched'" class="watched-text">watched</span>
+      </div>
     </ul>
-</nav>
-
-
+  </nav>

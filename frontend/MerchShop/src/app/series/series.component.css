@@ -24,10 +24,11 @@ ul {
 }
 
 .image-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content:flex-start;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 15px;
+  list-style: none; /* Remove the default list bullet points */
+  padding: 0; /* Remove the default list padding */
 }
 
 .image-gallery > li {
@@ -127,4 +128,28 @@ span{
 	100% {
 		background-position: 0% 50%;
 	}
+}
+
+@media (max-width: 1600px) {
+  .image-gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1450px) {
+  .image-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1100px) {
+  .image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .image-gallery {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

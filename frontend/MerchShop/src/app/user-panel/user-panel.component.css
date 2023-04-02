@@ -68,7 +68,6 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
   object-fit: cover;
   border: solid #182d28;
   border-radius: 10px;
@@ -87,10 +86,73 @@
   transform: translate(-50%, -50%);
 }
 
-.profile:hover{
+
+.overlay {
+    border-radius: 50%;
+    width: 20%;
+    height: 20%;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    z-index: 2;
+    opacity: 0; /* Set the initial opacity to 0 */
+    transition: opacity 0.3s; /* Add a transition for a smooth appearance */
+}
+  
+.overlay span {
+    color:#bec5b3;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+}
+  
+.profileDiv:hover .overlay {
+    opacity: 1; /* Set the opacity to 1 on hover */
 }
 
-.background:hover{
+.overlayBkg {
+    border-radius: 10px;
+    width: 100%;
+    height: 20%;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    z-index: 0;
+    opacity: 0; /* Set the initial opacity to 0 */
+    transition: opacity 0.3s; /* Add a transition for a smooth appearance */
+}
+  
+.overlayBkg span {
+    color:#bec5b3;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50px); /* Adjust the second percentage value to move the text higher or lower */
+}
+  
+.backgroundDiv:hover .overlayBkg {
+    opacity: 1; /* Set the opacity to 1 on hover */
+}
+
+
+.actions{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    position: absolute;
+    top:40%;
 }

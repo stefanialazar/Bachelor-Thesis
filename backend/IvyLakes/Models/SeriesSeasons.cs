@@ -10,7 +10,6 @@ namespace IvyLakes.Models
         public int SeriesId { get; set; }
         public int AiredSeason { get; set; }
         public int AiredEpisodes { get; set; }
-
         public int Id { get; set; }
     }
 }

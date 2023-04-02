@@ -1,3 +1,28 @@
+.watched {
+    background-color: #182d28;
+    color: #bec5b3;
+}
+
+.button-container {
+    position: relative;
+    display: inline-block;
+}
+  
+.watched-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    z-index: 2;
+    color: #bec5b3;
+    transition: 0.5s;
+}
+  
+  .button-container:hover .watched-text {
+    display: none;
+  }
+
 nav ul {
     list-style-type: none;
     margin-right: 15px;

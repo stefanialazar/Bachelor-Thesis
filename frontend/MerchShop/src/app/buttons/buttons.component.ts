@@ -9,6 +9,7 @@ export class ButtonsComponent implements AfterViewInit{
 
   @Input() buttonText : string = '';
   @Input() buttonId : string = '';
+  @Input() buttonBkg: string = '';
 
   @ViewChildren('buttonColor') buttonColors!: QueryList<ElementRef>;
   
