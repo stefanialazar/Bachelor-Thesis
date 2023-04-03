@@ -15,7 +15,7 @@
       <div class="gradient-border" id="box">Keep Watching</div>
       <ul class="image-gallery">
         <li *ngFor="let s of startedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
-          <img [attr.src]="(s.seriesImageURL)" alt="???" >
+          <img [attr.src]="(s.seriesImageUrl)" alt="???" >
           <div class="overlay"><span><i class="fal fa-tv-retro"></i></span></div>
         </li>
       </ul>
@@ -24,7 +24,7 @@
       <div class="gradient-border" id="box">Not started</div>
       <ul class="image-gallery">
         <li *ngFor="let s of notStartedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
-          <img [attr.src]="(s.seriesImageURL)" alt="???" >
+          <img [attr.src]="(s.seriesImageUrl)" alt="???" >
           <div class="overlay"><span><i class="fal fa-tv-retro"></i></span></div>
         </li>
       </ul>
@@ -35,7 +35,7 @@
     <div class="gradient-border" id="box">All Series</div>
       <ul class="image-gallery">
         <li *ngFor="let s of series | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
-          <img [attr.src]="(s.seriesImageURL)" alt="???" >
+          <img [attr.src]="(s.seriesImageUrl)" alt="???" >
           <div class="overlay"><span><i class="fal fa-tv-retro"></i></span></div>
         </li>
       </ul>

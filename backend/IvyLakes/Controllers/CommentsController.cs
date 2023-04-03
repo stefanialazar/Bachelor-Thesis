@@ -7,6 +7,7 @@ using Microsoft.AspNet.OData;
 using System.Threading.Tasks;
 using IvyLakes.Data;
 using IvyLakes.DTOs;
+using IvyLakes.Models;
 
 namespace IvyLakes.Controllers
 {
@@ -19,13 +20,19 @@ namespace IvyLakes.Controllers
             _context = context;
         }
 
-        [EnableQuery]
-        [HttpGet("api/comments")]
-        public async Task<IActionResult> Get()
+        [HttpGet("api/comments/{commentId}")]
+        public async Task<IActionResult> GetComment([FromRoute] int commentId)
         {
-            var comments = await _context.Comments.ToListAsync();
-            return Ok(comments);
+            var comment = await _context.Comments.FindAsync(commentId);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(comment);
         }
+
 
         [EnableQuery]
         [HttpGet("api/comments/{id}/season{seasonNumber}episode{episodeNumber}")]
@@ -36,7 +43,24 @@ namespace IvyLakes.Controllers
                 return NotFound();
             }
 
-            var serieEpisodeComments = await _context.Comments.Where(s => s.SeriesID == id).Where(s => s.SeasonNumber == seasonNumber).Where(s => s.EpisodeNumber == episodeNumber).ToListAsync();
+            var serieEpisodeComments = await _context.Comments
+                .Include(c => c.User)
+                .Where(s => s.SeriesId == id)
+                .Where(s => s.SeasonNumber == seasonNumber)
+                .Where(s => s.EpisodeNumber == episodeNumber)
+                .Select(c => new
+                {
+                    c.CommentId,
+                    c.UserId,
+                    AuthorName = c.User.FirstName + " " + c.User.LastName,
+                    c.SeriesId,
+                    c.SeasonNumber,
+                    c.EpisodeNumber,
+                    c.CommentBody,
+                    c.CommentImageUrl,
+                    c.Score
+                })
+                .ToListAsync();
 
             if (serieEpisodeComments == null)
             {
@@ -45,6 +69,34 @@ namespace IvyLakes.Controllers
 
             return Ok(serieEpisodeComments);
         }
+
+        [HttpPost("api/comments/create")]
+        public async Task<IActionResult> CreateComment([FromBody] CommentsDTO createCommentDTO)
+        {
+
+            // Retrieve the maximum CommentID value from the existing records
+            int maxCommentID = await _context.Comments.MaxAsync(c => c.CommentId);
+
+            // Create the new comment object
+            var newComment = new Comment
+            {
+                CommentId = maxCommentID + 1, // Set the new CommentID value
+                UserId = createCommentDTO.UserId,
+                SeriesId = createCommentDTO.SeriesId,
+                SeasonNumber = createCommentDTO.SeasonNumber,
+                EpisodeNumber = createCommentDTO.EpisodeNumber,
+                CommentBody = createCommentDTO.CommentBody,
+                CommentImageUrl = createCommentDTO.CommentImageURL,
+                Score = 0
+            };
+
+            // Add the new comment to the table
+            _context.Comments.Add(newComment);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetComment), new { commentId = newComment.CommentId }, newComment);
+        }
+
 
     }
 }

@@ -48,7 +48,7 @@ export class SeriesComponent implements OnInit{
       }
     },
     error => {
-      if(error.status = 401) {
+      if(error.status == 401) {
        this.LoggedIn = false;
       }
     });    

@@ -37,7 +37,7 @@ namespace IvyLakes.Controllers {
             }
 
             var product = await _context.Images
-                .FirstOrDefaultAsync(m => m.ImageID == id);
+                .FirstOrDefaultAsync(m => m.ImageId == id);
             if (product == null)
             {
                 return NotFound();

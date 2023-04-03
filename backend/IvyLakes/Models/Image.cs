@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace IvyLakes.Models
 {
-    public class Image
+    public partial class Image
     {
-        public int ImageID { get; set; }
-        public string ImageURL { get; set; }
-        public int SeriesID { get; set; }
+        public int ImageId { get; set; }
+        public string ImageUrl { get; set; }
+        public int SeriesId { get; set; }
+
+        public virtual TvSeries Series { get; set; }
     }
 }

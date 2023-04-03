@@ -43,11 +43,15 @@ export class UserPanelComponent implements OnInit {
             this.backgroundPicture = element.backgroundPicture;
           }
         });
+        this.LoggedIn = true; // Set LoggedIn to true when the token is present and valid
+      }
+      else{
+        this.LoggedIn = false;
       }
     },
     error => {
-      if(error.status = 401) {
-       this.LoggedIn = false;
+      if(error.status == 401) {
+      this.LoggedIn = false;
       }
     });
   }

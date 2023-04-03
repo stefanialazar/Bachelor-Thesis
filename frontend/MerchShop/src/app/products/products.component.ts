@@ -27,14 +27,15 @@ export class ProductsComponent implements OnInit {
       this.series = series;
       if (this.images) {
         for (var i = 0; i < this.images.length; i++) {
-          this.images[i].seriesTitle = this.series[this.images[i].seriesID - 1].seriesTitle;
-          this.allImages[i].seriesTitle = this.series[this.images[i].seriesID - 1].seriesTitle;
+          this.images[i].seriesTitle = this.series[this.images[i].seriesId - 1].seriesTitle;
+          this.allImages[i].seriesTitle = this.series[this.images[i].seriesId - 1].seriesTitle;
         }
       }
     });
   }
 
   search(value: string): void {
+    console.log(this.series);
     if (this.allImages && this.allImages.length > 0) {
       this.images = this.allImages.filter((val: { seriesTitle: string; }) =>
         val.seriesTitle.toLowerCase().includes(value.toLowerCase())

@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace IvyLakes.Models
 {
-    public class UserSeries
+    public partial class UserSeries
     {
         public int SeriesId { get; set; }
         public Guid UserId { get; set; }
-        public int CurrentSeason { get; set; }
-        public int CurrentEpisode { get; set; }
+        public int? CurrentSeason { get; set; }
+        public int? CurrentEpisode { get; set; }
         public int Id { get; set; }
+
+        public virtual TvSeries Series { get; set; }
+        public virtual User User { get; set; }
     }
 }

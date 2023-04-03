@@ -33,4 +33,9 @@ export class TrackSeriesEpisodesComponent implements OnInit {
       }
     });
   }
+
+  toggleReplyForm(comment: any): void {
+    comment.showReplyForm = !comment.showReplyForm;
+  }
+
 }

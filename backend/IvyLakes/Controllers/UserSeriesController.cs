@@ -29,7 +29,6 @@ namespace IvyLakes.Controllers
 
         [EnableQuery]
         [EnableCors]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("api/user-seasons")]
         public async Task<IActionResult> Get()
         {

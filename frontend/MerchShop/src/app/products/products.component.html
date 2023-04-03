@@ -15,8 +15,8 @@
 
   <div class="container">
     <ul class="image-gallery">
-      <li *ngFor="let product of images" [routerLink]="['/products', product.imageID]">
-        <img src="{{product.imageURL}}" alt="???" >
+      <li *ngFor="let product of images" [routerLink]="['/products', product.imageId]">
+        <img src="{{product.imageUrl}}" alt="???" >
         <div class="overlay"><span><i class="fal fa-tshirt"></i></span></div>
       </li>
     </ul>

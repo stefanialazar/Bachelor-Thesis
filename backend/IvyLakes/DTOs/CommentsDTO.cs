@@ -14,6 +14,7 @@ namespace IvyLakes.DTOs
         public int EpisodeNumber { get; set; }
         public string CommentBody { get; set; }
         public string CommentImageURL { get; set; }
+        public int Score { get; set; }
     }
 }
 

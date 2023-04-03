@@ -1,27 +1,46 @@
-
-<app-navigate-episodes></app-navigate-episodes>
-<div class="page"><h1>Season {{seasonNumber}}, Episode {{episodeNumber}}</h1></div>
-
 <div class="page">
+  <div class="reddit-header">
+    <h1 class="reddit-title">Season {{seasonNumber}}, Episode {{episodeNumber}}</h1>
+    <app-navigate-episodes></app-navigate-episodes>
+  </div>
 
-    <div class="leave-comment">
-        <h2>Leave a Comment</h2>
-        <form>
-          <div>
-            <label for="comment">Comment:</label>
-            <textarea id="comment" name="comment" required></textarea>
+  <div class="reddit-body">
+    <div class="reddit-post">
+      <div class="reddit-post-body">
+        <div class="reddit-post-title">Leave a Comment</div>
+        <form class="reddit-comment-form">
+          <div class="reddit-comment-input-group">
+            <label for="comment" class="reddit-comment-label">Comment:</label>
+            <textarea id="comment" name="comment" required class="reddit-comment-input"></textarea>
           </div>
-          <div>
-            <label for="image">Upload an Image:</label>
-            <input type="file" id="image" name="image">
+          <div class="reddit-comment-input-group">
+            <label for="image" class="reddit-comment-label">Upload an Image (insert url):</label>
+            <textarea id="comment" name="comment" required class="reddit-comment-input"></textarea>
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" class="reddit-comment-submit">Submit</button>
         </form>
+      </div>
     </div>
 
-    <div class="all-comments">
-        <div *ngFor="let comment of comments">
-            <span> {{comment.commentBody}}</span>
+    <div class="reddit-comments">
+      <div *ngFor="let comment of comments" class="reddit-comment">
+        <div class="reddit-comment-author"><h2>Posted by {{comment.authorName}}</h2></div>
+        <div class="reddit-comment-body">
+          <div class="reddit-comment-text">{{comment.commentBody}}</div>
+          <img src="{{comment.commentImageUrl}}" class="reddit-comment-image">
         </div>
+        <div class="reddit-comment-footer">
+          <div class="reddit-comment-score">Score: {{comment.score}}</div>
+          <app-buttons class="reddit-comment-reply" [buttonText]="'Reply'" (click)="toggleReplyForm(comment)"></app-buttons>
+        </div>
+        <form class="reddit-comment-reply-form" *ngIf="comment.showReplyForm">
+          <div class="reddit-comment-input-group">
+            <label for="reply" class="reddit-comment-label">Reply:</label>
+            <textarea id="reply" name="reply" required class="reddit-comment-input"></textarea>
+          </div>
+          <button type="submit" class="reddit-comment-submit">Submit</button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
