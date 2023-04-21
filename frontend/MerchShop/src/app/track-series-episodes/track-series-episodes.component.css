@@ -83,22 +83,8 @@
   }
   
   .reddit-comment-submit {
-    width: 102%;
-    padding: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #bec5b3;
-    background-color: #182d28;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .reddit-comment-submit:hover {
-    background-color:  #bec5b3;
-    border: 3px solid #182d28;
-    color: #182d28;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .reddit-comments {

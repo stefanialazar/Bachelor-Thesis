@@ -17,13 +17,13 @@
             <label for="image" class="reddit-comment-label">Upload an Image (insert url):</label>
             <textarea id="comment" name="comment" required class="reddit-comment-input"></textarea>
           </div>
-          <button type="submit" class="reddit-comment-submit">Submit</button>
+          <app-buttons class="reddit-comment-submit" [buttonText]="'Submit'"></app-buttons>
         </form>
       </div>
     </div>
 
     <div class="reddit-comments">
-      <div *ngFor="let comment of comments" class="reddit-comment">
+      <div *ngFor="let comment of comments; let i = index" class="reddit-comment">
         <div class="reddit-comment-author"><h2>Posted by {{comment.authorName}}</h2></div>
         <div class="reddit-comment-body">
           <div class="reddit-comment-text">{{comment.commentBody}}</div>
@@ -31,14 +31,31 @@
         </div>
         <div class="reddit-comment-footer">
           <div class="reddit-comment-score">Score: {{comment.score}}</div>
+          <button class="reddit-comment-like" (click)="likeComment(comment)"><i class="far fa-thumbs-up"></i></button>
+          <button class="reddit-comment-dislike" (click)="dislikeComment(comment)"><i class="far fa-thumbs-down"></i></button>
           <app-buttons class="reddit-comment-reply" [buttonText]="'Reply'" (click)="toggleReplyForm(comment)"></app-buttons>
+          <app-buttons class="reddit-comment-reply" [buttonText]="'Show comments'" (click)="toggleReplies(comment)"></app-buttons>
         </div>
         <form class="reddit-comment-reply-form" *ngIf="comment.showReplyForm">
           <div class="reddit-comment-input-group">
             <label for="reply" class="reddit-comment-label">Reply:</label>
             <textarea id="reply" name="reply" required class="reddit-comment-input"></textarea>
           </div>
-          <button type="submit" class="reddit-comment-submit">Submit</button>
+          <app-buttons class="reddit-comment-submit" [buttonText]="'Submit'"></app-buttons>
+        </form>
+        <form class="reddit-comment-reply-form" *ngIf="comment.showReplies">
+          <div class="reddit-comment-replies">
+            <div *ngFor="let reply of commentsReplies[i]" class="reddit-comment">
+              <div class="reddit-comment-author"><h2>Posted by {{reply.authorName}}</h2></div>
+              <div class="reddit-comment-body">
+                <div class="reddit-comment-text">{{reply.commentBody}}</div>
+                <img src="{{reply.commentImageUrl}}" class="reddit-comment-image">
+                <div class="reddit-comment-score">Score: {{reply.score}}</div>
+                <button class="reddit-comment-like" (click)="likeReply(reply)"><i class="fa-regular fa-heart"></i></button>
+          <button class="reddit-comment-dislike" (click)="dislikeReply(reply)"><i class="fa-regular fa-heart"></i></button>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>

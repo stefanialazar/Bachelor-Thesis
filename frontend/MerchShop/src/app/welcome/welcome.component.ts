@@ -15,6 +15,10 @@ export class WelcomeComponent {
   lastName: string = '';
   users: any;
   LoggedIn = true; 
+  gifSrc = '../../assets/products/ssGif.gif';
+  staticSrc = '../../assets/products/seriessync.jpg';
+  currentSrc = this.staticSrc;
+  showMessage: boolean = false;
  
   constructor(private reqS: RequestService, private http: HttpClient) { }
 
@@ -49,6 +53,28 @@ export class WelcomeComponent {
     } catch(Error) {
       return null;
     }
+  }
+
+  playGif(): void {
+    this.currentSrc = this.gifSrc;
+  }
+
+  stopGif(): void {
+    this.currentSrc = this.staticSrc;
+  }
+
+  copyEmailToClipboard(): void {
+    const email = 'stefania.d.lazar@gmail.com';
+    const el = document.createElement('textarea');
+    el.value = email;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    this.showMessage = true;
+    setTimeout(() => {
+      this.showMessage = false;
+    }, 3000); 
   }
 
 }

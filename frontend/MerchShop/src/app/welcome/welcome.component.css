@@ -4,7 +4,11 @@
     padding-right: 100px;
     color : #182d28;
     font-family: Lora;
-    margin-top: 22%;
+    margin-top: 2%;
+}
+
+b {
+    font-family: Lora;
 }
 
 #box {
@@ -15,6 +19,7 @@
     height: 60px;
     color: #bec5b3;
     font-size: 1.8rem;
+    margin-bottom: 5%;
 }
 
 .gradient-border {
@@ -49,9 +54,41 @@ background-size: 300% 300%;
 }
 }
 
-.animation {
+.gifContainer{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+}
+
+.ssGif {
     position: relative;
-    width: 100%;
-    height: 20%;
-    background: #182d28;
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+}
+
+.logos{
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    color: inherit;
+}
+
+.logo {
+    margin-right: 20%;
+}
+
+.logo:last-child {
+    margin-right: 0;
+}
+
+#email:hover {
+    cursor: pointer;
+}
+  
+.copied-message {
+    position: absolute;
+    left: 65%;
 }

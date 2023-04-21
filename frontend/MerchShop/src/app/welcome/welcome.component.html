@@ -1,4 +1,9 @@
 <div class="page">
+    <div class="gifContainer" >
+        <img [src]="currentSrc" alt="???" class="ssGif" (mouseover)="playGif()" (mouseout)="stopGif()">
+    </div>
+    
+
     <div *ngIf = "!LoggedIn">
         <div class="gradient-border" id="box">Welcome to SeriesSync</div>
     </div>
@@ -7,8 +12,17 @@
         <div class="gradient-border" id="box">Welcome back to SeriesSync, {{firstName}} {{lastName}}!</div>
     </div>
 
-    <div class="animation">
-
+    <div class="logos">
+        <a href="https://github.com/stefanialazar" target="_blank" rel="noopener noreferrer" class="logo">
+            <i class="fab fa-github fa-2x"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/stefania-lazar-a696b9195/" target="_blank" rel="noopener noreferrer" class="logo">
+            <i class="fab fa-linkedin fa-2x"></i>
+        </a>
+        <i class="fas fa-envelope fa-2x logo" (click)="copyEmailToClipboard()" id="email"></i>
     </div>
+    <!-- Show message below the icon if showMessage is true -->
+    <p *ngIf="showMessage" class="copied-message"><b>Email copied to clipboard!</b></p>
     
+
 </div>

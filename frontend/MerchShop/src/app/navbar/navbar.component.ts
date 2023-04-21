@@ -2,7 +2,6 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { navbarData } from './navbar-data';
 
 interface SideNavToggle {
-  screenWidth: number;
   collapsed: boolean;
 }
 
@@ -18,12 +17,11 @@ export class NavbarComponent {
 
 
   collapsed = false;
-  screenWidth = 1080;
   navData = navbarData;
   
   toggleCollapse(){
     this.collapsed = !this.collapsed;
-    this.onToggleSideNav.emit({collapsed: this.collapsed, screenWidth: this.screenWidth});
+    this.onToggleSideNav.emit({collapsed: this.collapsed});
   }
 
 }

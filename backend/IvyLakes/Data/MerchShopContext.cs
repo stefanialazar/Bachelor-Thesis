@@ -19,6 +19,7 @@ namespace IvyLakes.Data
         }
 
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<CommentsReply> CommentsReplies { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<SeriesSeason> SeriesSeasons { get; set; }
         public virtual DbSet<TvSeries> TvSeries { get; set; }
@@ -56,6 +57,8 @@ namespace IvyLakes.Data
 
                 entity.Property(e => e.EpisodeNumber).HasColumnName("episodeNumber");
 
+                entity.Property(e => e.Score).HasColumnName("score");
+
                 entity.Property(e => e.SeasonNumber).HasColumnName("seasonNumber");
 
                 entity.Property(e => e.SeriesId).HasColumnName("seriesID");
@@ -73,6 +76,45 @@ namespace IvyLakes.Data
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Comment__userID__02FC7413");
+            });
+
+            modelBuilder.Entity<CommentsReply>(entity =>
+            {
+                entity.HasKey(e => e.ReplyId)
+                    .HasName("PK__Comments__36BBF6A8002479C4");
+
+                entity.Property(e => e.ReplyId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("replyID");
+
+                entity.Property(e => e.CommentBody)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("commentBody");
+
+                entity.Property(e => e.CommentId).HasColumnName("commentID");
+
+                entity.Property(e => e.CommentImageUrl)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("commentImageURL");
+
+                entity.Property(e => e.Score).HasColumnName("score");
+
+                entity.Property(e => e.UserId).HasColumnName("userID");
+
+                entity.HasOne(d => d.Comment)
+                    .WithMany(p => p.CommentsReplies)
+                    .HasForeignKey(d => d.CommentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__CommentsR__comme__1EA48E88");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.CommentsReplies)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__CommentsR__userI__1DB06A4F");
             });
 
             modelBuilder.Entity<Image>(entity =>
@@ -156,7 +198,7 @@ namespace IvyLakes.Data
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<UserSeries>(entity =>

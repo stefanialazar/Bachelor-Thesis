@@ -47,7 +47,7 @@ namespace IvyLakes
                               Version = "v1",
                               Description = "MerchShop Backend"
                           });
-
+                c.CustomSchemaIds(type => type.ToString());
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Description = "JWT Authorization header using the bearer scheme",

@@ -10,6 +10,7 @@ namespace IvyLakes.Models
         public User()
         {
             Comments = new HashSet<Comment>();
+            CommentsReplies = new HashSet<CommentsReply>();
             UserSeries = new HashSet<UserSeries>();
         }
 
@@ -24,6 +25,7 @@ namespace IvyLakes.Models
         public string BackgroundPicture { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<CommentsReply> CommentsReplies { get; set; }
         public virtual ICollection<UserSeries> UserSeries { get; set; }
     }
 }
