@@ -1,3 +1,6 @@
+<div class="pageBack">
+    <i class="fa fa-2x fa-arrow-left" (click)="goBack()" id="back"></i>
+</div>
 <div class="page">
     <ng-container *ngIf="series">
         <div class="container">
@@ -13,11 +16,10 @@
 </div>
 
 <div class="page">
-
     <div class="container2">
-        <select name="menu" id="meun-items" (change)="selectSeason($event)">
-            <option disabled selected>Select Season</option>
-            <option class="item" *ngFor="let ss of seriesSeasonsList">Season {{ss.airedSeason}}</option>
+        <select name="menu" id="meun-items" (change)="selectSeason($event)" [value]="currentSeason ? 'Season ' + currentSeason : ''">
+            <option disabled [selected]="!currentSeason">Select Season</option>
+            <option class="item" *ngFor="let ss of seriesSeasonsList">Season {{ ss.airedSeason }}</option>
         </select>
     </div>
 </div>
