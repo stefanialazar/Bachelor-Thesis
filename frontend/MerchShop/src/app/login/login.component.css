@@ -4,57 +4,62 @@
     padding-right: 100px;
     color : #182d28;
     font-family: Lora;
-}
-
-.text-center {
+  }
+  
+  .text-center {
     text-transform: uppercase;
     font-size: 23px;
     margin: -50px 0 80px 0;
     display: block;
     text-align: center;
-}
-
-#button{
+  }
+  
+  .submit{
     display: flex;
     justify-content: center;
-}
-.box {
+  }
+  .box {
     left: 50%;
     top: 50%;
     background-color: #bec5b3;
     border-radius: 25px;
     padding: 70px 100px;
-}
-.input-container {
+  }
+  .input-container {
     position: relative;
     margin-bottom: 25px;
-}
-.input-container label {
+    border: 3px solid #182d28;
+    border-radius: 10px 100px / 120px;
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+  .input-container label {
     position: absolute;
     top: 0px;
     left: 0px;
     font-size: 20px;
     transition: all 0.5s ease-in-out;
-}
-.input-container input {
+  }
+  .input-container input {
     border: 0;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #bec5b3;
     background: transparent;
     width: 100%;
     padding: 8px 0 5px 0;
     font-size: 16px;
-}
-.input-container input:focus {
+  }
+  .input-container input:focus {
     border: none;
     outline: none;
-    border-bottom: 1px solid #571109;
-}
-
-.input-container input:focus ~ label, .input-container input:valid ~ label {
+  }
+  
+  .input-container input:focus ~ label, .input-container input:placeholder-shown ~ label {
     top: -25px;
     font-size: 15px;
-}
-
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
- }
+  }
+  
+  
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #bec5b3 inset;
+  }
+  

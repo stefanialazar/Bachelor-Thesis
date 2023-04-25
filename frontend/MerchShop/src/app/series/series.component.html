@@ -29,6 +29,15 @@
         </li>
       </ul>
     </div>
+    <div class="finished">
+      <div class="gradient-border" id="box">Finished</div>
+      <ul class="image-gallery">
+        <li *ngFor="let s of finishedSeries | searchFilter: searchTerm" [routerLink]="['/series', s.seriesId]">
+          <img [attr.src]="(s.seriesImageUrl)" alt="???" >
+          <div class="overlay"><span><i class="fal fa-tv-retro"></i></span></div>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div *ngIf="LoggedIn == false">

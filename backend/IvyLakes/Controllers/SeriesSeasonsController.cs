@@ -21,6 +21,20 @@ namespace IvyLakes.Controllers
         }
 
         [EnableQuery]
+        [HttpGet("api/series-seasons")]
+        public async Task<IActionResult> Get()
+        {
+            var seriesSeasons = await _context.SeriesSeasons.ToListAsync();
+
+            if (seriesSeasons == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(seriesSeasons);
+        }
+
+        [EnableQuery]
         [HttpGet("api/series-seasons/{id}")]
         public async Task<IActionResult> Get([FromRoute] int? id)
         {

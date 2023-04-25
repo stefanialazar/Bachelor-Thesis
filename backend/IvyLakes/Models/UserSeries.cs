@@ -11,7 +11,6 @@ namespace IvyLakes.Models
         public Guid UserId { get; set; }
         public int? CurrentSeason { get; set; }
         public int? CurrentEpisode { get; set; }
-        public int Id { get; set; }
 
         public virtual TvSeries Series { get; set; }
         public virtual User User { get; set; }

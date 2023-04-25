@@ -17,6 +17,9 @@ import { TrackSeriesComponent } from './track-series/track-series.component';
 import { NavigateEpisodesComponent } from './navigate-episodes/navigate-episodes.component';
 import { TrackSeriesEpisodesComponent } from './track-series-episodes/track-series-episodes.component';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     SeriesComponent,
     TrackSeriesComponent,
     NavigateEpisodesComponent,
-    TrackSeriesEpisodesComponent],
+    TrackSeriesEpisodesComponent,
+    ConfirmationDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -39,6 +43,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     ProductModule,
     FormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
   ],
 
   providers: [],

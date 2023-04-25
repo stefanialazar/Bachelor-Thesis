@@ -1,9 +1,9 @@
-﻿using IvyLakes.Models;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata;
+using IvyLakes.Models;
+
+#nullable disable
 
 namespace IvyLakes.Data
 {
@@ -30,6 +30,7 @@ namespace IvyLakes.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=LSD\\SQLEXPRESS;Database=MerchShop;Trusted_Connection=True;");
             }
         }
@@ -203,27 +204,19 @@ namespace IvyLakes.Data
 
             modelBuilder.Entity<UserSeries>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CurrentEpisode).HasColumnName("currentEpisode");
-
-                entity.Property(e => e.CurrentSeason).HasColumnName("currentSeason");
-
-                entity.Property(e => e.SeriesId).HasColumnName("seriesId");
-
-                entity.Property(e => e.UserId).HasColumnName("userId");
+                entity.HasKey(e => new { e.SeriesId, e.UserId });
 
                 entity.HasOne(d => d.Series)
                     .WithMany(p => p.UserSeries)
                     .HasForeignKey(d => d.SeriesId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__UserSerie__serie__6FE99F9F");
+                    .HasConstraintName("FK_UserSeries_Series");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserSeries)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__UserSerie__userI__70DDC3D8");
+                    .HasConstraintName("FK_UserSeries_User");
             });
 
             OnModelCreatingPartial(modelBuilder);

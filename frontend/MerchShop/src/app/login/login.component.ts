@@ -18,19 +18,28 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  submitLogin() {
 
-    const username = (<HTMLInputElement>document.getElementById("username")).value;
-    const password = (<HTMLInputElement>document.getElementById("pw")).value;
-    const obj = {
-      username: username,
-      password: password
-    };
-    this.loginService.loginUser(obj).subscribe((res: any) => {
+  submitLogin() {
+  const username = (<HTMLInputElement>document.getElementById("username")).value;
+  const password = (<HTMLInputElement>document.getElementById("pw")).value;
+  const obj = {
+    username: username,
+    password: password
+  };
+  this.loginService.loginUser(obj).subscribe(
+    (res: any) => {
       const token = res.token;
       localStorage.setItem("jwt", token);
       this.router.navigate(['/welcome']);
-    });
+    },
+    (error) => {
+      if (error.status === 401) {
+        alert('Email or password is incorrect.');
+      } else {
+        alert('Email or password is incorrect.');
+      }
+    }
+  );
+}
 
-  }
 }

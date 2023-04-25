@@ -10,7 +10,9 @@
 			<input id="pw" type="password" required=""/>
 			<label>Password</label>
 		</div>
-		<app-buttons [buttonText]="'Login'" (click)="submitLogin()" id="button"></app-buttons>
+		<div class="submit">
+			<app-buttons [buttonText]="'Login'" (click)="submitLogin()" id="button"></app-buttons>
+		</div>
 	</form>	
 	</div>
 </div>

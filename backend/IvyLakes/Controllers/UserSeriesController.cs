@@ -60,5 +60,50 @@ namespace IvyLakes.Controllers
 
             return Ok(seriesSeasons);
         }
+
+        [HttpPost("api/user-seasons/update")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> UpdateUserSeries([FromBody] UserSeriesDTO updateUserSeries)
+        {
+            var userId = updateUserSeries.UserId;
+            if (userId == Guid.Empty)
+            {
+                return Unauthorized();
+            }
+
+            // Find the existing UserSeries record
+            var userSeries = await _context.UserSeries
+                .FirstOrDefaultAsync(us => us.SeriesId == updateUserSeries.SeriesId && us.UserId == userId);
+
+            if (userSeries == null)
+            {
+                // Create a new UserSeries record
+                userSeries = new UserSeries
+                {
+                    SeriesId = updateUserSeries.SeriesId,
+                    UserId = updateUserSeries.UserId,
+                    CurrentSeason = updateUserSeries.CurrentSeason,
+                    CurrentEpisode = updateUserSeries.CurrentEpisode
+                };
+
+                // Add the new record to the UserSeries table
+                _context.UserSeries.Add(userSeries);
+            }
+            else
+            {
+                // Update the currentSeason and currentEpisode of the existing UserSeries record
+                userSeries.CurrentSeason = updateUserSeries.CurrentSeason;
+                userSeries.CurrentEpisode = updateUserSeries.CurrentEpisode;
+            }
+
+            // Save the changes
+            await _context.SaveChangesAsync();
+
+            // Return the updated or newly created UserSeries record
+            return Ok(userSeries);
+        }
+
+
+
     }
 }

@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RequestService } from '../core/request.service';
 import jwt_decode from 'jwt-decode';
-import { forkJoin } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-track-series',
@@ -27,7 +29,12 @@ export class TrackSeriesComponent implements OnInit{
   allUserSeries: any;
   currentUserProgress: any;
 
-  constructor(private route: ActivatedRoute, private reqS: RequestService, private http: HttpClient, private location: Location,) { }
+  constructor(private route: ActivatedRoute, 
+    private reqS: RequestService, 
+    private http: HttpClient, 
+    private location: Location,  
+    private dialog: MatDialog, 
+    private router: Router, ) { }
 
   ngOnInit(): void {
 
@@ -56,6 +63,9 @@ export class TrackSeriesComponent implements OnInit{
     this.route.paramMap.subscribe(params => {
 
       var seriesId = params.get('id');
+      if (seriesId !== null) {
+        this.seriesId = parseInt(seriesId, 10);
+      }
     
       forkJoin({
         series: this.reqS.get('https://localhost:44341/api/series/' + seriesId),
@@ -107,4 +117,30 @@ export class TrackSeriesComponent implements OnInit{
     this.location.back();
   }
 
+  navigateToEpisode(link: string[], watched: boolean, seasonNumber: number, episodeNumber: number): void {
+    if (!watched) {
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: { 
+          userId: this.userId, 
+          seriesId: this.seriesId,
+          newSeason: seasonNumber, 
+          newEpisode: episodeNumber 
+        },
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // Navigate to the episode if the user confirms
+          this.router.navigate(link);
+        }
+      });
+    } else {
+      // Navigate to the episode directly if it's already watched
+      this.router.navigate(link);
+    }
+  }
+
+  episodeNumber(i: number): number {
+    return i + 1;
+  }  
 }

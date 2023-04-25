@@ -10,16 +10,19 @@
 				<input id="lastName" type="text" required=""/>
 				<label>Last Name</label>		
 			</div>
-		<div class="input-container">
-			<input id="username" type="email" required=""/>
-			<label>Email</label>		
-		</div>
-		<div class="input-container">		
-			<input id="pw" type="password" required=""/>
-			<label>Password</label>
-		</div>
-		<app-buttons [buttonText]="'Register'" (click)="submitRegister()" id="button"></app-buttons>
-	</form>	
+			<div class="input-container">
+				<input id="username" type="email" required=""/>
+				<label>Email</label>		
+			</div>
+			<div class="input-container">		
+				<input id="pw" type="password" required=""/>
+				<label>Password</label>
+			</div>
+			<div class="submit">
+				<app-buttons [buttonText]="'Register'" (click)="submitRegister()"></app-buttons>
+			</div>
+			
+		</form>	
 	</div>
 </div>
 

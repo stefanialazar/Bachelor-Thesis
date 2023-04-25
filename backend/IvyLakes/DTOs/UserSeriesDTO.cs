@@ -11,6 +11,5 @@ namespace IvyLakes.DTOs
         public Guid UserId { get; set; }
         public int CurrentSeason { get; set; }
         public int CurrentEpisode { get; set; }
-        public int Id { get; set; }
     }
 }

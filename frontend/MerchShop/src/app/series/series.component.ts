@@ -16,9 +16,12 @@ export class SeriesComponent implements OnInit{
   series: any;
   allSeries : any;
   startedSeries: any[] = [];
+  finishedSeries: any[] = [];
   notStartedSeries: any[] = [];
   searchTerm = '';
   allUserSeries: any;
+  allSeriesSeasons: any;
+  highestSeasonsForEachSeries: any;
   myUserSeries: any[] = [];
   userId: string = '';
   LoggedIn = true; 
@@ -40,6 +43,12 @@ export class SeriesComponent implements OnInit{
     this.http.get('https://localhost:44341/api/user-seasons', { headers: headers }).subscribe((res: any) => {
         this.allUserSeries = res;  
     });
+
+    this.http.get('https://localhost:44341/api/series-seasons', { headers: headers }).subscribe((res: any) => {
+        this.allSeriesSeasons = res;
+        this.highestSeasonsForEachSeries = this.getLastSeasonForEachSeries(this.allSeriesSeasons);
+    });
+
 
     this.http.get('https://localhost:44341/api/users', { headers: headers }).subscribe((res: any) => {
       if(token){
@@ -69,23 +78,46 @@ export class SeriesComponent implements OnInit{
     }
   }
 
-  findStartedSeries(){
+  findStartedSeries() {
     this.startedSeries = [];
+    this.finishedSeries = [];
     this.notStartedSeries = [];
-    this.findMyUserSeries(); 
-    if(this.LoggedIn == true){
-      if(this.series){
-        this.series.forEach( (serie: any) => {
-          if(this.myUserSeries.find((mySerie) => mySerie.seriesId === serie.seriesId)){
-            this.startedSeries.push(serie);
+  
+    this.findMyUserSeries();
+  
+    if (this.LoggedIn === true) {
+      if (this.series) {
+        this.series.forEach((serie: any) => {
+          if (this.myUserSeries) {
+            const userSerie = this.myUserSeries.find((mySerie) => mySerie.seriesId === serie.seriesId);
+            if (this.highestSeasonsForEachSeries) {
+              const highestSeason = this.highestSeasonsForEachSeries.find(
+                (season: { seriesId: any }) => season.seriesId === serie.seriesId
+              );
+  
+              if (userSerie) {
+                // Check if the user has finished the series
+                if (
+                  highestSeason &&
+                  userSerie.currentSeason === highestSeason.airedSeason &&
+                  userSerie.currentEpisode === highestSeason.airedEpisodes
+                ) {
+                  this.finishedSeries.push(serie);
+                } else {
+                  this.startedSeries.push(serie);
+                }
+              } else {
+                this.notStartedSeries.push(serie);
+              }
+            }
           }
-          else {
-            this.notStartedSeries.push(serie);
-          }
-        }); 
+        });
       }
     }
   }
+  
+  
+  
 
 
   decodeToken(token: string): any {
@@ -100,5 +132,18 @@ export class SeriesComponent implements OnInit{
       val.seriesTitle.toLowerCase().includes(value)
     );
   }
+
+  getLastSeasonForEachSeries(allSeriesSeasons: any[]) {
+    const lastSeasons: any = {};
+  
+    allSeriesSeasons.forEach((season) => {
+      if (!lastSeasons[season.seriesId] || season.airedSeason > lastSeasons[season.seriesId].airedSeason) {
+        lastSeasons[season.seriesId] = season;
+      }
+    });
+  
+    return Object.values(lastSeasons);
+  }
+  
 
 }
