@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace IvyLakes.DTOs
 {
-    public class UpdateBackgroundPictureDTO
+    public class UserPictureDTO
     {
         public Guid UserId { get; set; }
         public string BackgroundPicture { get; set; }
-
         public string ProfilePicture { get; set; }
+        public string NewEmail { get; set; }
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }

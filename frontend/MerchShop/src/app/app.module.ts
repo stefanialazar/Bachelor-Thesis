@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     TrackSeriesComponent,
     NavigateEpisodesComponent,
     TrackSeriesEpisodesComponent,
-    ConfirmationDialogComponent],
+    ConfirmationDialogComponent,
+    EditUserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

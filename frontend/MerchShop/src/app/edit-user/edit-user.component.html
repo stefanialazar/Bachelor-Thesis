@@ -1,0 +1,34 @@
+<div class="page">
+    <div *ngIf="user" class="edit-profile-container">
+        <h2>{{user.firstName}} {{user.lastName}}</h2>
+        <div class="section">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+          </div>
+          <app-buttons [buttonText]="'save new email'" (click)="updateEmail()" class="btn"></app-buttons>
+        </div>
+        <div class="section">
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
+          </div>
+          <div class="btn">
+            <app-buttons [buttonText]="'save new pw'" (click)="updatePassword()"></app-buttons>
+          </div>
+          
+        </div>
+        <div class="section">
+          <div class="form-group">
+            <label for="address1">Address 1:</label>
+            <input type="text" id="address1" [(ngModel)]="user.address1" name="address1" required>
+          </div>
+          <div class="form-group">
+            <label for="address2">Address 2:</label>
+            <input type="text" id="address2" [(ngModel)]="user.address2" name="address2">
+          </div>
+          <app-buttons [buttonText]="'save new adress'" (click)="updateAddress()" class="btn"></app-buttons>
+        </div>
+      </div>
+    <app-messages *ngIf="message" [mesId]="message.type" [messageText]="message.text" (messageClosed)="onMessageClosed()"></app-messages>
+</div>

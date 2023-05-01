@@ -27,6 +27,8 @@ namespace IvyLakes.Models
         public int Points { get; set; }
         public string ProfilePicture { get; set; }
         public string BackgroundPicture { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<CommentsReply> CommentsReplies { get; set; }

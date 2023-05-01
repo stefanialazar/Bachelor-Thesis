@@ -31,6 +31,21 @@ namespace IvyLakes.Controllers
             return Ok(users);
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("api/user/{id}")]
+        public async Task<IActionResult> GetUserById(Guid id)
+        {
+            var user = await _userRepo.GetUserById(id);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(user);
+        }
+
+
         [EnableQuery]
         [HttpPost("api/users")]
         public async Task<IActionResult> AddUser([FromBody] RegisterDTO registerDto)
@@ -59,7 +74,7 @@ namespace IvyLakes.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("api/users/update-background-picture")]
-        public async Task<IActionResult> UpdateBackgroundPicture([FromBody] UpdateBackgroundPictureDTO updateBackgroundPictureDTO)
+        public async Task<IActionResult> UpdateBackgroundPicture([FromBody] UserPictureDTO updateBackgroundPictureDTO)
         {
             var user = await _userRepo.UpdateBackgroundPicture(updateBackgroundPictureDTO.UserId, updateBackgroundPictureDTO.BackgroundPicture);
 
@@ -73,7 +88,7 @@ namespace IvyLakes.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("api/users/update-profile-picture")]
-        public async Task<IActionResult> UpdateProfilePicture([FromBody] UpdateBackgroundPictureDTO updateBackgroundPictureDTO)
+        public async Task<IActionResult> UpdateProfilePicture([FromBody] UserPictureDTO updateBackgroundPictureDTO)
         {
             var user = await _userRepo.UpdateProfilePicture(updateBackgroundPictureDTO.UserId, updateBackgroundPictureDTO.ProfilePicture);
 
@@ -84,5 +99,48 @@ namespace IvyLakes.Controllers
 
             return Ok(user);
         }
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("api/users/update-email")]
+        public async Task<IActionResult> UpdateEmail([FromBody] UserEmailDTO emailUpdateDTO)
+        {
+            var user = await _userRepo.UpdateEmail(emailUpdateDTO.UserId, emailUpdateDTO.NewEmail);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(user);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("api/users/update-password")]
+        public async Task<IActionResult> UpdatePassword([FromBody] UserPasswordDTO passwordUpdateDTO)
+        {
+            var user = await _userRepo.UpdatePassword(passwordUpdateDTO.UserId, passwordUpdateDTO.OldPassword, passwordUpdateDTO.NewPassword);
+
+            if (user == null)
+            {
+                return NotFound("User not found or old password is incorrect.");
+            }
+
+            return Ok(user);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost("api/users/update-addresses")]
+        public async Task<IActionResult> UpdateAddresses([FromBody] UserAdressDTO addressUpdateDTO)
+        {
+            var user = await _userRepo.UpdateAddresses(addressUpdateDTO.UserId, addressUpdateDTO.Address1, addressUpdateDTO.Address2);
+
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            return Ok(user);
+        }
+
+
     }
 }

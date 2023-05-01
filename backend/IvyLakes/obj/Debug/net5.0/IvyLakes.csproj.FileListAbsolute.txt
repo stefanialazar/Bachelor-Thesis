@@ -75,3 +75,4 @@ D:\FMI\ANUL_3_INFO\SEM_I\ANGULAR\IvyLakes\clothesShop\Bachelor-Thesis\backend\Iv
 D:\FMI\ANUL_3_INFO\SEM_I\ANGULAR\IvyLakes\clothesShop\Bachelor-Thesis\backend\IvyLakes\obj\Debug\net5.0\ref\IvyLakes.dll
 D:\FMI\ANUL_3_INFO\SEM_I\ANGULAR\IvyLakes\clothesShop\Bachelor-Thesis\backend\IvyLakes\obj\Debug\net5.0\IvyLakes.pdb
 D:\FMI\ANUL_3_INFO\SEM_I\ANGULAR\IvyLakes\clothesShop\Bachelor-Thesis\backend\IvyLakes\obj\Debug\net5.0\IvyLakes.genruntimeconfig.cache
+D:\FMI\ANUL_3_INFO\SEM_I\ANGULAR\IvyLakes\clothesShop\Bachelor-Thesis\backend\IvyLakes\obj\Debug\net5.0\IvyLakes.csproj.AssemblyReference.cache

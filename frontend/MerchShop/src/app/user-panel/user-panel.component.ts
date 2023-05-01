@@ -18,6 +18,7 @@ export class UserPanelComponent implements OnInit {
   backgroundPicture: string = '';
   users: any;
   LoggedIn = true; 
+  message: { type: string, text: string } | null = null;
  
   constructor(private reqS: RequestService, private http: HttpClient) { }
 
@@ -69,7 +70,7 @@ export class UserPanelComponent implements OnInit {
     window.location.href = 'http://localhost:4200/welcome';
   }
 
-  newProfilePicture(){
+  async newProfilePicture(){
     const token: any= localStorage.getItem("jwt");
 
     const headers = new HttpHeaders({
@@ -78,32 +79,64 @@ export class UserPanelComponent implements OnInit {
     });
     console.log(this.userId);
     const newProfilePictureUrl = prompt('Enter the new profile image URL:', '');
-    const object = {
-      UserId: this.userId,
-      ProfilePicture: newProfilePictureUrl,
+    if (newProfilePictureUrl !== null && newProfilePictureUrl.trim() !== '') {
+      const isValid = await this.isValidImageUrl(newProfilePictureUrl);
+      if (isValid){
+        const object = {
+          UserId: this.userId,
+          ProfilePicture: newProfilePictureUrl,
+        }
+        this.reqS.post('https://localhost:44341/api/users/update-profile-picture', object, { headers }).subscribe((res: any) => {
+          location.reload();
+        });
+      } else {
+        this.message = { type: 'danger', text: 'The provided URL is not a valid image. Please try again with a valid image URL.' };
+      }
+      
     }
-    this.reqS.post('https://localhost:44341/api/users/update-profile-picture', object, { headers }).subscribe((res: any) => {
-      location.reload();
-    })
   }
 
-  newBkgPicture(){
+  async newBkgPicture(){
     const token: any= localStorage.getItem("jwt");
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     });
     const newBackgroundPictureUrl = prompt('Enter the new profile image URL:', '');
-    const object = {
-      UserId: this.userId,
-      BackgroundPicture: newBackgroundPictureUrl,
+    if (newBackgroundPictureUrl !== null && newBackgroundPictureUrl.trim() !== '') {
+      const isValid = await this.isValidImageUrl(newBackgroundPictureUrl);
+      if(isValid){
+        const object = {
+          UserId: this.userId,
+          BackgroundPicture: newBackgroundPictureUrl,
+        }
+        this.reqS.post('https://localhost:44341/api/users/update-background-picture', object, { headers }).subscribe((res: any) => {
+          location.reload();
+        });
+      } else {
+        this.message = { type: 'danger', text: 'The provided URL is not a valid image. Please try again with a valid image URL.' };
+      }
+      
     }
-    this.reqS.post('https://localhost:44341/api/users/update-background-picture', object, { headers }).subscribe((res: any) => {
-      location.reload();
-    })
-    
   }
 
+  isValidImageUrl(url: string) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = url;
   
+      img.onload = () => {
+        resolve(true);
+      };
+  
+      img.onerror = () => {
+        resolve(false);
+      };
+    });
+  }
 
+  onMessageClosed() {
+    this.message = null;
+  }
+  
 }

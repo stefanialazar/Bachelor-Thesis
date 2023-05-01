@@ -64,5 +64,65 @@ namespace IvyLakes.Repositories
 
             return user;
         }
+        public async Task<User> UpdateEmail(Guid userId, string newEmail)
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            user.Email = newEmail;
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        public async Task<User> UpdatePassword(Guid userId, string oldPassword, string newPassword)
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null || user.Password != oldPassword) // You should compare the hashed passwords, not the plain text
+            {
+                return null;
+            }
+
+            user.Password = newPassword; // Make sure to hash the new password before storing it
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
+        public async Task<User> UpdateAddresses(Guid userId, string address1, string address2)
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            if (address1 != null)
+            {
+                user.Address1 = address1;
+            }
+
+            if (address2 != null)
+            {
+                user.Address2 = address2;
+            }
+
+            await _context.SaveChangesAsync();
+            return user;
+        }
+
+
+        public async Task<User> GetUserById(Guid id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
+
+
     }
 }
