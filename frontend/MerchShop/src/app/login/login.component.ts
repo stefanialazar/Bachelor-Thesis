@@ -10,7 +10,7 @@ import { LoginService } from './login-service.service';
 })
 export class LoginComponent implements OnInit {
 
-  //@Output() loggedUser: EventEmitter<any> = new EventEmitter();
+  message: { type: string, text: string } | null = null;
 
 
   constructor(private loginService: LoginService, private router: Router) { }
@@ -34,12 +34,17 @@ export class LoginComponent implements OnInit {
     },
     (error) => {
       if (error.status === 401) {
-        alert('Email or password is incorrect.');
+        this.message = { type: 'danger', text: 'Email or password is incorrect.' };
       } else {
-        alert('Email or password is incorrect.');
+        this.message = { type: 'danger', text: 'Email or password is incorrect.' };
       }
     }
   );
 }
+
+onMessageClosed() {
+  this.message = null;
+}
+
 
 }

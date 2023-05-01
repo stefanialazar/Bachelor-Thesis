@@ -6,6 +6,11 @@
     font-family: Lora;
 }
 
+h2 {
+    font-family: Lora;
+    padding: 30px;
+}
+
 .buttons{
     z-index: 1;
     display: flex;

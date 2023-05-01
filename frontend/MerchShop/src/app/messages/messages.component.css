@@ -1,12 +1,10 @@
-.page{
+  .page{
     margin-left: 100px;
     padding-left: 100px;
     padding-right: 100px;
     color : #182d28;
     font-family: Lora;
-    position : relative;
-}
-
+  }
   body{
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -67,10 +65,7 @@
     border:2px solid #3ebd61;
     display:none;
     z-index:99;
-    position:absolute;
-    top:150%;
-    left:50%;
-    width:50%;
+    position:fixed;
   }
   .success .icon{
     background-color:#3ebd61;
@@ -82,8 +77,6 @@
     display:none;
     z-index:99;
     position:fixed;
-    top:80%;
-    width:50%;
   }
   .warning .icon{
     background-color: #EF9400;
@@ -91,14 +84,21 @@
   
   .danger{
     background-color: rgba(236, 77, 43, 0.5);
-    border:2px solid #EF9400;
+    border:2px solid rgba(142, 75, 61, 0.5);
     display:none;
     z-index:99;
     position:absolute;
-    top:150%;
-    left:50%;
-    width:50%;
+    position:fixed;
   }
   .danger .icon{
     background-color: #EC4D2B;
+  }
+
+  .message-fixed {
+    position: fixed;
+    bottom: 20px;
+    left: 52%;
+    transform: translateX(-50%);
+    z-index: 99;
+    width: 50%;
   }

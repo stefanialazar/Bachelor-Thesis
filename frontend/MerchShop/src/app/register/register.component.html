@@ -18,12 +18,25 @@
 				<input id="pw" type="password" required=""/>
 				<label>Password</label>
 			</div>
-			<div class="submit">
-				<app-buttons [buttonText]="'Register'" (click)="submitRegister()"></app-buttons>
-			</div>
-			
 		</form>	
+		<div class="reqs">
+			<div class="req">
+				<p>Your password should contain at least:</p>
+				<ul>
+					<li><b>8 characters long</b></li>
+					<li><b>one lowercase letter</b></li>
+					<li><b>one uppercase letter</b></li>
+					<li><b>one numeric digit</b></li>
+				</ul>
+				
+			</div>
+			<p class="req">Your first name and last name should start with an uppercase.</p>
+		</div>
+		<div class="submit">
+			<app-buttons [buttonText]="'register'" (click)="submitRegister()"></app-buttons>
+		</div>
 	</div>
+	<app-messages *ngIf="message" [mesId]="message.type" [messageText]="message.text" (messageClosed)="onMessageClosed()"></app-messages>
 </div>
 
 

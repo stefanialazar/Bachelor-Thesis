@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-messages',
@@ -9,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MessagesComponent implements OnInit{
 
   @Input() mesId : string = ''
+  @Input() messageText: string = ''; 
+  @Output() messageClosed: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit(): void {
     const mes = document.getElementById(this.mesId);
@@ -17,16 +18,16 @@ export class MessagesComponent implements OnInit{
       mes.style.transition = 'all 2s';
     }
   }
-
   
   close(message: string) {
     const mes = document.getElementById(message);
-    if (mes){
+    if (mes) {
       mes.style.display = 'none';
       mes.style.transition = 'all 2s';
-      window.location.reload();
     }
+    this.messageClosed.emit();
   }
+  
 
   
 }

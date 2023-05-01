@@ -1,5 +1,5 @@
 <div class="page">
-    <h2>Customise your product</h2>
+    <h2>Customise your merch!</h2>
     
     <div class="parent">
       <img class="image" src="{{product?.imageUrl}}">
@@ -27,8 +27,11 @@
       </div>
     </div>
 
-    <app-messages *ngIf = "PressedAdd && LoggedIn" [mesId]="'success'"></app-messages>
-    <app-messages *ngIf = "PressedAdd && !LoggedIn" [mesId]="'warning'"></app-messages>
+    <app-messages *ngIf="showMessage && LoggedIn" [mesId]="'success'" messageText="Operation successful!" (messageClosed)="showMessage = false"></app-messages>
+    <app-messages *ngIf="showMessage && !LoggedIn" [mesId]="'warning'" messageText="You must be logged in to purchase merch." (messageClosed)="showMessage = false"></app-messages>
+
+
+
 
     <div class="buttons2">
       <app-buttons id="hidden"></app-buttons>

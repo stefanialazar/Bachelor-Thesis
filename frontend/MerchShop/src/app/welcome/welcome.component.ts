@@ -15,7 +15,7 @@ export class WelcomeComponent {
   lastName: string = '';
   users: any;
   LoggedIn = true; 
-  gifSrc = '../../assets/products/ssGif.gif';
+  gifSrc = '../../assets/products/ssGif.png';
   staticSrc = '../../assets/products/seriessync.jpg';
   currentSrc = this.staticSrc;
   showMessage: boolean = false;

@@ -10,6 +10,8 @@ import { RequestService } from '../core/request.service';
 })
 export class RegisterComponent implements OnInit {
 
+  message: { type: string, text: string } | null = null;
+
   constructor(private reqS: RequestService, private router: Router) { }
 
   ngOnInit(): void {
@@ -20,23 +22,36 @@ export class RegisterComponent implements OnInit {
     const password = (<HTMLInputElement>document.getElementById("pw")).value;
     const lastName = (<HTMLInputElement>document.getElementById("lastName")).value;
     const firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
-
+  
     if (!this.isValidEmail(email) || !this.isValidPassword(password) || !this.isValidName(firstName) || !this.isValidName(lastName)) {
-      alert('Invalid input. Please make sure all fields meet the requirements.');
+      this.message = { type: 'danger', text: 'Invalid input. Please make sure all fields meet the requirements.' };
       return;
     }
-
+  
     const object = {
       email: email,
       password: password,
       firstName: firstName,
       lastName: lastName
     }
-    this.reqS.post('https://localhost:44341/api/users', object).subscribe((res: any) => {
-      console.log(res);
-    })
-    this.router.navigate(['/login']);
+  
+    this.reqS.post('https://localhost:44341/api/users', object).subscribe(
+      (res: any) => {
+        console.log(res);
+        // Redirect to login page on successful registration
+        this.router.navigate(['/login']);
+      },
+      (err: any) => {
+        console.log(err);
+        if (err.status === 400 && err.error === 'User already exists.') {
+          this.message = { type: 'danger', text: 'User already exists. Please try again with a different email address.' };
+        } else {
+          this.message = { type: 'danger', text: 'An error occurred. Please try again later.' };
+        }
+      }
+    );
   }
+  
 
   isValidEmail(email: string) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -52,4 +67,9 @@ export class RegisterComponent implements OnInit {
     const nameRegex = /^[A-Z][a-z]*$/;
     return nameRegex.test(name);
   }
+
+  onMessageClosed() {
+    this.message = null;
+  }
+  
 }

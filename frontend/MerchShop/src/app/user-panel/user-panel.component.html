@@ -6,7 +6,7 @@
             <app-buttons [buttonText]="'Log In'" [routerLink]="['/login']"></app-buttons>
             <app-buttons [buttonText]="'Register'" [routerLink]="['/register']"></app-buttons>
         </div>
-        <app-messages [mesId]="'warning'"></app-messages>
+        <app-messages [mesId]="'warning'" messageText="You must be logged in to see your user panel."></app-messages>
     </div>
 
     <div *ngIf = "LoggedIn">

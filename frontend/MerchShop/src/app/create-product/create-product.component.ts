@@ -14,9 +14,9 @@ export class CreateProductComponent implements OnInit {
   errorMessage = '';
   product : any;
   id : any;
-  PressedAdd = false;
   users: any;
   LoggedIn = true; 
+  showMessage: boolean = false;
 
   constructor(private route: ActivatedRoute, private reqS: RequestService, private http: HttpClient) { }
 
@@ -196,8 +196,7 @@ export class CreateProductComponent implements OnInit {
   
 
   addToCart() {
-    this.PressedAdd = true;
-
+    this.showMessage = !this.showMessage;
   }
 
 

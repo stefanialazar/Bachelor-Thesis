@@ -11,10 +11,11 @@
 			<label>Password</label>
 		</div>
 		<div class="submit">
-			<app-buttons [buttonText]="'Login'" (click)="submitLogin()" id="button"></app-buttons>
+			<app-buttons [buttonText]="'login'" (click)="submitLogin()" id="button"></app-buttons>
 		</div>
 	</form>	
 	</div>
+	<app-messages *ngIf="message" [mesId]="message.type" [messageText]="message.text" (messageClosed)="onMessageClosed()"></app-messages>
 </div>
 
 
