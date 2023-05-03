@@ -11,6 +11,7 @@ import { SeriesComponent } from './series/series.component';
 import { TrackSeriesComponent } from './track-series/track-series.component';
 import { TrackSeriesEpisodesComponent } from './track-series-episodes/track-series-episodes.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'products', component: ProductsComponent},
   {path: 'products/:id', component: CreateProductComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'cart/:id', component: UserCartComponent},
   {path: 'user/:id', component: EditUserComponent},
   {path: 'user', component: UserPanelComponent},
   {path: 'welcome', component: WelcomeComponent},

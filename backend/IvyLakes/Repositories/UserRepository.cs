@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend.Helpers;
 
 namespace IvyLakes.Repositories
 {
@@ -79,20 +80,30 @@ namespace IvyLakes.Repositories
             return user;
         }
 
-        public async Task<User> UpdatePassword(Guid userId, string oldPassword, string newPassword)
+        public async Task<bool> UpdatePassword(Guid userId, string oldPassword, string newPassword)
         {
             var user = await _context.Users.FindAsync(userId);
 
-            if (user == null || user.Password != oldPassword) // You should compare the hashed passwords, not the plain text
+            if (user == null)
             {
-                return null;
+                return false;
             }
 
-            user.Password = newPassword; // Make sure to hash the new password before storing it
-            await _context.SaveChangesAsync();
+            var pe = new PasswordEncrypter();
+            string oldPasswordEncoded = pe.EncodePasswordToBase64(oldPassword);
 
-            return user;
+            if (user.Password != oldPasswordEncoded)
+            {
+                return false;
+            }
+
+            string newPasswordEncoded = pe.EncodePasswordToBase64(newPassword);
+            user.Password = newPasswordEncoded;
+
+            await _context.SaveChangesAsync();
+            return true;
         }
+
 
         public async Task<User> UpdateAddresses(Guid userId, string address1, string address2)
         {

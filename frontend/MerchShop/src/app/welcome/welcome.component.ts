@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { RequestService } from '../core/request.service';
 import jwt_decode from 'jwt-decode';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent {
+export class WelcomeComponent implements OnDestroy {
   userId: string = '';
   firstName: string = '';
   lastName: string = '';
@@ -23,7 +23,17 @@ export class WelcomeComponent {
   constructor(private reqS: RequestService, private http: HttpClient) { }
 
   ngOnInit(): void {
-
+    // Check if the page has been reloaded
+  if (!localStorage.getItem("reloaded")) {
+    // If not, set the flag and reload the page
+    localStorage.setItem("reloaded", "true");
+    window.location.reload();
+  } else {
+    // If yes, remove the flag
+    localStorage.removeItem("reloaded");
+  }
+  
+    document.body.classList.add('no-scroll');
     const token: any= localStorage.getItem("jwt");
 
     const headers = new HttpHeaders({
@@ -53,6 +63,15 @@ export class WelcomeComponent {
     } catch(Error) {
       return null;
     }
+  }
+
+  ngOnDestroy(): void {
+    document.body.classList.remove('no-scroll');
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event: Event) {
+    document.body.classList.remove('no-scroll');
   }
 
   playGif(): void {

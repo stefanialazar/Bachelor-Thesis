@@ -18,6 +18,7 @@ namespace IvyLakes.Data
         {
         }
 
+        public virtual DbSet<Carts> Carts { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CommentsReply> CommentsReplies { get; set; }
         public virtual DbSet<Image> Images { get; set; }
@@ -38,6 +39,23 @@ namespace IvyLakes.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Carts>(entity =>
+            {
+                entity.HasKey(e => e.CartId); 
+
+                entity.Property(e => e.CartId)
+                    .HasColumnName("CartId")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserId")
+                    .IsRequired();
+
+                entity.Property(e => e.Merch)
+                    .HasColumnName("Merch")
+                    .IsRequired();
+            });
 
             modelBuilder.Entity<Comment>(entity =>
             {

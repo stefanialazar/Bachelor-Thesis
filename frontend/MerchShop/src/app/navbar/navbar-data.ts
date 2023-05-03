@@ -2,26 +2,37 @@ export const navbarData = [
     {
     routeLink: 'welcome',
     icon: 'fal fa-home',
-    label: 'Home'
+    label: 'Home',
+    requiresUserId: false
     }, 
     {
     routeLink: 'series',
     icon: 'fal fa-tv-retro',
-    label: 'Series'
+    label: 'Series',
+    requiresUserId: false,
     },
     {
     routeLink: 'products',
     icon: 'fal fa-tshirt',
-    label: 'Merch'
+    label: 'Merch',
+    requiresUserId: false,
     },
     {
     routeLink: 'cart',
     icon: 'fal fa-cash-register',
-    label: 'Cart'
+    label: 'Cart',
+    requiresUserId: false,
+    },
+    {
+    routeLink: 'cart/:userId',
+    icon: 'fal fa-cash-register',
+    label: 'Cart',
+    requiresUserId: true,
     },
     {
     routeLink: 'user',
     icon: 'fal fa-user',
-    label: 'Account'
+    label: 'Account',
+    requiresUserId: false,
     },   
 ];

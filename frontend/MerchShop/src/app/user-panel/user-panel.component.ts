@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { RequestService } from '../core/request.service';
 import jwt_decode from 'jwt-decode';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './user-panel.component.html',
   styleUrls: ['./user-panel.component.css']
 })
-export class UserPanelComponent implements OnInit {
+export class UserPanelComponent implements OnInit, OnDestroy {
 
   userId: string = '';
   firstName: string = '';
@@ -24,6 +24,7 @@ export class UserPanelComponent implements OnInit {
 
   ngOnInit(): void {
 
+    document.body.classList.add('no-scroll');
     const token: any= localStorage.getItem("jwt");
 
     const headers = new HttpHeaders({
@@ -55,6 +56,15 @@ export class UserPanelComponent implements OnInit {
       this.LoggedIn = false;
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    document.body.classList.remove('no-scroll');
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHandler(event: Event) {
+    document.body.classList.remove('no-scroll');
   }
 
   decodeToken(token: string): any {

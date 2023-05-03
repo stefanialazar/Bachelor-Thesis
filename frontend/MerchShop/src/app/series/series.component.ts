@@ -24,7 +24,7 @@ export class SeriesComponent implements OnInit{
   highestSeasonsForEachSeries: any;
   myUserSeries: any[] = [];
   userId: string = '';
-  LoggedIn = true; 
+  LoggedIn = false; 
 
   ngOnInit(): void {
 
@@ -54,6 +54,7 @@ export class SeriesComponent implements OnInit{
       if(token){
         const tokenObject = this.decodeToken(token);
         this.userId = tokenObject.id;
+        this.LoggedIn = true;
       }
     },
     error => {

@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { UserCartComponent } from './user-cart/user-cart.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     NavigateEpisodesComponent,
     TrackSeriesEpisodesComponent,
     ConfirmationDialogComponent,
-    EditUserComponent],
+    EditUserComponent,
+    UserCartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -15,7 +15,7 @@ namespace IvyLakes.IRepositories
         Task<User> UpdateBackgroundPicture(Guid UserId, string backgroundPicture);
         Task<User> UpdateProfilePicture(Guid UserId, string profilePicture);
         Task<User> UpdateEmail(Guid userId, string newEmail);
-        Task<User> UpdatePassword(Guid userId, string oldPassword, string newPassword);
+        Task<bool> UpdatePassword(Guid userId, string oldPassword, string newPassword);
         Task<User> UpdateAddresses(Guid userId, string address1, string address2);
         Task<User> GetUserById(Guid id);
 

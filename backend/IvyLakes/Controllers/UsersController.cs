@@ -117,15 +117,16 @@ namespace IvyLakes.Controllers
         [HttpPost("api/users/update-password")]
         public async Task<IActionResult> UpdatePassword([FromBody] UserPasswordDTO passwordUpdateDTO)
         {
-            var user = await _userRepo.UpdatePassword(passwordUpdateDTO.UserId, passwordUpdateDTO.OldPassword, passwordUpdateDTO.NewPassword);
+            var result = await _userRepo.UpdatePassword(passwordUpdateDTO.UserId, passwordUpdateDTO.OldPassword, passwordUpdateDTO.NewPassword);
 
-            if (user == null)
+            if (result)
             {
-                return NotFound("User not found or old password is incorrect.");
+                return Ok(new { message = "Password updated successfully" });
             }
 
-            return Ok(user);
+            return BadRequest("Error updating password");
         }
+
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("api/users/update-addresses")]
