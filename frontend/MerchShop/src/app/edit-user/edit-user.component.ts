@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RequestService } from '../core/request.service';
 import { HttpHeaders } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css']
 })
-export class EditUserComponent implements OnInit, OnDestroy{
+export class EditUserComponent implements OnInit {
   userId: string = '';
   user : any;
   message: { type: string, text: string } | null = null;
@@ -19,7 +19,6 @@ export class EditUserComponent implements OnInit, OnDestroy{
   
 
   ngOnInit(): void {
-    document.body.classList.add('no-scroll');
     const token: any = localStorage.getItem("jwt");
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -34,15 +33,6 @@ export class EditUserComponent implements OnInit, OnDestroy{
       })
     });
   }
-  ngOnDestroy(): void {
-    document.body.classList.remove('no-scroll');
-  }
-
-  @HostListener('window:beforeunload', ['$event'])
-  beforeUnloadHandler(event: Event) {
-    document.body.classList.remove('no-scroll');
-  }
-
 
   updateEmail() {
     const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[\w-]{2,4}$/;

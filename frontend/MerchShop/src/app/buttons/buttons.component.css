@@ -83,3 +83,46 @@ nav ul li span:nth-child(3) {
 nav ul li span:nth-child(4) {
     --n: 4;
 }
+
+/* Medium screens */
+@media (max-width: 992px) {
+    nav ul li {
+      font-size: 12px;
+      width: 8em;
+      height: 2.5em;
+      line-height: 2.5em;
+    }
+  
+    .watched-text {
+      font-size: 12px;
+    }
+  }
+  
+  /* Small screens */
+  @media (max-width: 768px) {
+    nav ul li {
+      font-size: 11px;
+      width: 7em;
+      height: 2.2em;
+      line-height: 2.2em;
+    }
+  
+    .watched-text {
+      font-size: 11px;
+    }
+  }
+  
+  /* Extra small screens */
+  @media (max-width: 576px) {
+    nav ul li {
+      font-size: 10px;
+      width: 6em;
+      height: 2em;
+      line-height: 2em;
+    }
+  
+    .watched-text {
+      font-size: 10px;
+    }
+  }
+  

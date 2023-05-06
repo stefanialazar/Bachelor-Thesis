@@ -1,6 +1,6 @@
 <div class="page">
-    <h2>Customise your merch!</h2>
-    
+    <div class="gradient-border" id="box">Customise your merch!</div>
+
     <div class="parent">
       <img class="image" src="{{product?.imageUrl}}">
       <img id="notebook" src="../../assets/products/notebook.png">
@@ -22,14 +22,15 @@
         <app-buttons class="color" [buttonText]="'black'" [buttonId]="'black'" (click)="filterBlack()"></app-buttons>
         <app-buttons class="color" [buttonText]="'pink'" [buttonId]="'pink'" (click)="filterPink()"></app-buttons>
         <app-buttons class="color" [buttonText]="'gray'" [buttonId]="'gray'" (click)="filterGray()"></app-buttons>
+      </div>
+      <div class="colors2">
+        <app-buttons id="hidden"></app-buttons>
         <app-buttons class="color" [buttonText]="'brown'" [buttonId]="'brown'" (click)="filterBrown()"></app-buttons>
         <app-buttons class="color" [buttonText]="'dark blue'" [buttonId]="'dark-blue'" (click)="filterDarkB()"></app-buttons>
       </div>
     </div>
 
-    <app-messages *ngIf="showMessage && LoggedIn" [mesId]="'success'" messageText="Operation successful!" (messageClosed)="showMessage = false"></app-messages>
-    <app-messages *ngIf="showMessage && !LoggedIn" [mesId]="'warning'" messageText="You must be logged in to purchase merch." (messageClosed)="showMessage = false"></app-messages>
-
+    <app-messages *ngIf="message" [mesId]="message.type" [messageText]="message.text" (messageClosed)="onMessageClosed()"></app-messages>
 
 
 

@@ -12,6 +12,7 @@ import { TrackSeriesComponent } from './track-series/track-series.component';
 import { TrackSeriesEpisodesComponent } from './track-series-episodes/track-series-episodes.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'cart/:id', component: UserCartComponent},
   {path: 'user/:id', component: EditUserComponent},
+  {path: 'orders/:id', component: UserOrdersComponent},
   {path: 'user', component: UserPanelComponent},
   {path: 'welcome', component: WelcomeComponent},
   {path: '', redirectTo: 'welcome', pathMatch: 'full'}

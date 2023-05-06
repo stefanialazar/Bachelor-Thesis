@@ -22,6 +22,7 @@ namespace IvyLakes.Data
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<CommentsReply> CommentsReplies { get; set; }
         public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<SeriesSeason> SeriesSeasons { get; set; }
         public virtual DbSet<TvSeries> TvSeries { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -155,6 +156,23 @@ namespace IvyLakes.Data
                     .HasForeignKey(d => d.SeriesId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Images__seriesID__60A75C0F");
+            });
+
+            modelBuilder.Entity<Orders>(entity =>
+            {
+                entity.HasKey(e => e.OrderId);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserId")
+                    .IsRequired();
+
+                entity.Property(e => e.OrderDate)
+                   .HasColumnName("OrderDate")
+                   .IsRequired();
+
+                entity.Property(e => e.Merch)
+                    .HasColumnName("Merch")
+                    .IsRequired();
             });
 
             modelBuilder.Entity<SeriesSeason>(entity =>

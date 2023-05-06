@@ -11,5 +11,8 @@ namespace IvyLakes.IRepositories
     {
         Task<IEnumerable<Carts>> GetCartsByUserId(Guid userId);
         Task<Carts> AddMerchToCart(Guid userId, string newMerch);
+        Task<Carts> AddCart(Carts cart);
+        Task<Carts> UpdateCart(Guid userId, string updatedCartContent);
     }
 }
+

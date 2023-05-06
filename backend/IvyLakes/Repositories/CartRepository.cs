@@ -38,6 +38,27 @@ namespace IvyLakes.Repositories
             return cart;
         }
 
+        public async Task<Carts> AddCart(Carts cart)
+        {
+            _context.Carts.Add(cart);
+            await _context.SaveChangesAsync();
+            return cart;
+        }
+
+        public async Task<Carts> UpdateCart(Guid userId, string updatedCartContent)
+        {
+            var cart = await _context.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
+            if (cart == null)
+            {
+                return null;
+            }
+
+            cart.Merch = updatedCartContent;
+            await _context.SaveChangesAsync();
+
+            return cart;
+        }
+
 
     }
 }

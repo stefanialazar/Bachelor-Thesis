@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UserCartComponent } from './user-cart/user-cart.component';
     TrackSeriesEpisodesComponent,
     ConfirmationDialogComponent,
     EditUserComponent,
-    UserCartComponent],
+    UserCartComponent,
+    UserOrdersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

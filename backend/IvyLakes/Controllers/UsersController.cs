@@ -1,4 +1,5 @@
 ﻿using Backend.Helpers;
+using IvyLakes.Data;
 using IvyLakes.DTOs;
 using IvyLakes.IRepositories;
 using IvyLakes.Models;
@@ -6,6 +7,7 @@ using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +19,13 @@ namespace IvyLakes.Controllers
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepo;
-        public UsersController(IUserRepository userRepo)
+        private readonly ICartRepository _cartRepo;
+        private readonly MerchShopContext _context;
+        public UsersController(IUserRepository userRepo, ICartRepository cartRepo, MerchShopContext context)
         {
             _userRepo = userRepo;
+            _cartRepo = cartRepo;
+            _context = context;
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -69,6 +75,17 @@ namespace IvyLakes.Controllers
                 RegistrationDate = DateTime.Now
             };
             user = await _userRepo.AddUser(userToAdd);
+
+            int maxCartID = await _context.Carts.MaxAsync(c => c.CartId);
+
+            var newCart = new Carts
+            {
+                CartId = maxCartID + 1,
+                UserId = user.Id,
+                Merch = ""
+            };
+            
+            await _cartRepo.AddCart(newCart);
             return Ok(user);
         }
 

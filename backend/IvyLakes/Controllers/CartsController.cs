@@ -43,6 +43,25 @@ namespace IvyLakes.Controllers
             return Ok(carts);
         }
 
+        [HttpPut("api/cart/{userId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> UpdateCart([FromRoute] Guid userId, [FromBody] CartsDTO updatedCartData)
+        {
+            if (userId == Guid.Empty || string.IsNullOrEmpty(updatedCartData.Merch))
+            {
+                return BadRequest();
+            }
+
+            var updatedCart = await _cartRepo.UpdateCart(userId, updatedCartData.Merch);
+
+            if (updatedCart == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(updatedCart);
+        }
+
         [HttpPost("api/cart/add-merch")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> AddMerchToCart([FromBody] CartsDTO merchToAdd)
@@ -52,7 +71,8 @@ namespace IvyLakes.Controllers
                 return BadRequest();
             }
 
-            var updatedCart = await _cartRepo.AddMerchToCart(merchToAdd.UserId, merchToAdd.Merch);
+            var updatedCart = await _cartRepo.AddMerchToCart(merchToAdd.UserId, merchToAdd.
+                Merch);
 
             if (updatedCart == null)
             {

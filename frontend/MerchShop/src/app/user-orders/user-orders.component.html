@@ -1,0 +1,40 @@
+<div class="page">
+    <div class="gradient-border" id="box">Your past orders</div>
+
+    <div *ngIf="updatedUserOrders">
+        <div *ngFor="let order of updatedUserOrders">
+            <table class="cart-items">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Type</th>
+                    <th>Color</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of order">
+                    <td><img src="{{ item[0] }}" class="img-cell"></td>
+                    <td>{{ item[1] }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[4] }}</td>
+                    <td>{{ item[3] }} $ </td>
+                    <td>{{ item[5] }}</td>
+                  </tr>
+                </tbody>
+            <p class="total"><strong>Total:</strong> {{ calculateTotal(order) }} $</p>
+            </table>
+        </div>
+    </div>
+    
+    <div *ngIf="!updatedUserMerch">
+      <div class="glass">
+        <img id="glass" src="../../assets/products/glass.png">
+    </div>
+    
+    <app-messages [mesId]="'warning'" messageText="You have no orders. Visit merch!"></app-messages>
+    </div>
+    
+</div>

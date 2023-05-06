@@ -24,8 +24,9 @@
 
 
         <div class="actions">
-            <app-buttons  [buttonText]="'Edit profile'" [routerLink]="['/user', userId]" ></app-buttons>
-            <app-buttons  [buttonText]="'Log Out'" (click)="logOut()"></app-buttons>
+            <app-buttons  [buttonText]="'edit profile'" [routerLink]="['/user', userId]" ></app-buttons>
+            <app-buttons  [buttonText]="'my orders'" [routerLink]="['/orders', userId]" ></app-buttons>
+            <app-buttons  [buttonText]="'log out'" (click)="logOut()"></app-buttons>
         </div>
 
         <app-messages *ngIf="message" [mesId]="message.type" [messageText]="message.text" (messageClosed)="onMessageClosed()"></app-messages>

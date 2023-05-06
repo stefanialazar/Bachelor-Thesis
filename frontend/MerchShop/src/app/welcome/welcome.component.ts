@@ -1,4 +1,4 @@
-import { Component, OnDestroy, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RequestService } from '../core/request.service';
 import jwt_decode from 'jwt-decode';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnDestroy {
+export class WelcomeComponent{
   userId: string = '';
   firstName: string = '';
   lastName: string = '';
@@ -32,8 +32,6 @@ export class WelcomeComponent implements OnDestroy {
     // If yes, remove the flag
     localStorage.removeItem("reloaded");
   }
-  
-    document.body.classList.add('no-scroll');
     const token: any= localStorage.getItem("jwt");
 
     const headers = new HttpHeaders({
@@ -63,15 +61,6 @@ export class WelcomeComponent implements OnDestroy {
     } catch(Error) {
       return null;
     }
-  }
-
-  ngOnDestroy(): void {
-    document.body.classList.remove('no-scroll');
-  }
-
-  @HostListener('window:beforeunload', ['$event'])
-  beforeUnloadHandler(event: Event) {
-    document.body.classList.remove('no-scroll');
   }
 
   playGif(): void {

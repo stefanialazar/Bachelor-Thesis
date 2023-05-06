@@ -1,7 +1,8 @@
 <div class="page">
     <div class="gradient-border" id="box">Shopping Cart</div>
 
-    <table class="cart-items">
+    <div *ngIf="updatedUserMerch">
+      <table class="cart-items">
         <thead>
           <tr>
             <th>Image</th>
@@ -13,14 +14,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of updatedUserMerch">
+          <tr *ngFor="let item of updatedUserMerch; let i = index">
             <td><img src="{{ item[0] }}" class="thumbnail"></td>
             <td>{{ item[1] }}</td>
             <td>{{ item[2] }}</td>
             <td>{{ item[4] }}</td>
             <td>{{ item[3] }} $ </td>
             <td>
-              <app-buttons  [buttonText]="'remove'"></app-buttons>
+              <app-buttons  [buttonText]="'remove'" (click)="removeFromCart(i)"></app-buttons>
             </td>
           </tr>
         </tbody>
@@ -30,5 +31,15 @@
         <p class="total"><strong>Total:</strong> {{ calculateTotal(userMerch) }} $</p>
         <app-buttons  [buttonText]="'checkout'"></app-buttons>
       </div>
+    
+    </div>
+
+    <div *ngIf="!updatedUserMerch">
+      <div class="cart">
+        <img id="cart" src="../../assets/products/cart.png">
+    </div>
+    
+    <app-messages [mesId]="'warning'" messageText="Your cart is empty. Visit merch!"></app-messages>
+    </div>
     
 </div>
