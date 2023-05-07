@@ -1,45 +1,45 @@
 <div class="page">
-    <div class="gradient-border" id="box">Shopping Cart</div>
+  <div class="gradient-border" id="box">Shopping Cart</div>
 
-    <div *ngIf="updatedUserMerch">
-      <table class="cart-items">
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Type</th>
-            <th>Color</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of updatedUserMerch; let i = index">
-            <td><img src="{{ item[0] }}" class="thumbnail"></td>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>{{ item[4] }}</td>
-            <td>{{ item[3] }} $ </td>
-            <td>
-              <app-buttons  [buttonText]="'remove'" (click)="removeFromCart(i)"></app-buttons>
-            </td>
-          </tr>
-        </tbody>
+  <div *ngIf="updatedUserMerch">
+    <table class="cart-items">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Type</th>
+          <th>Color</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of updatedUserMerch; let i = index">
+          <td><img src="{{ item[0] }}" class="thumbnail"></td>
+          <td>{{ item[1] }}</td>
+          <td>{{ item[2] }}</td>
+          <td>{{ item[4] }}</td>
+          <td>{{ item[3] }} $ </td>
+          <td>
+            <app-buttons  [buttonText]="'remove'" (click)="removeFromCart(i)"></app-buttons>
+          </td>
+        </tr>
+      </tbody>
     </table>
-    
-      <div class="cart-summary">
-        <p class="total"><strong>Total:</strong> {{ calculateTotal(userMerch) }} $</p>
-        <app-buttons  [buttonText]="'checkout'"></app-buttons>
-      </div>
-    
+  
+    <div class="cart-summary">
+      <p class="total"><strong>Total:</strong> {{ calculateTotal(userMerch) }} $</p>
+      <app-buttons  [buttonText]="'checkout'" (click)="checkout()"></app-buttons>
     </div>
+    <app-messages *ngIf="message" [mesId]="message.type" [messageText]="message.text" (messageClosed)="onMessageClosed()"></app-messages>
+  </div>    
+</div>
 
-    <div *ngIf="!updatedUserMerch">
-      <div class="cart">
-        <img id="cart" src="../../assets/products/cart.png">
+<div class="page">
+  <div *ngIf="!updatedUserMerch">
+    <div class="cart">
+      <img id="cart" src="../../assets/products/cart.png">
     </div>
-    
-    <app-messages [mesId]="'warning'" messageText="Your cart is empty. Visit merch!"></app-messages>
-    </div>
-    
+  <app-messages [mesId]="'warning'" messageText="Your cart is empty. Visit merch!"></app-messages>
+  </div>
 </div>

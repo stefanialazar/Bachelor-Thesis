@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, TitleStrategy } from '@angular/router';
 import { RequestService } from '../core/request.service';
 import { forkJoin } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-user-cart',
@@ -35,16 +37,10 @@ export class UserCartComponent implements OnInit {
         images: this.reqS.get('https://localhost:44341/api/images'),
       }).subscribe((result: { userCart: any, images: any }) => {
         this.allcartMerch = result.userCart[0];
-        console.log(this.allcartMerch.merch);
         if(this.allcartMerch.merch != ''){
           this.userMerch = this.parseMerch(this.allcartMerch.merch);
-          console.log(this.userMerch);
-        
           this.images = result.images;
-          console.log(this.images);
-        
           this.updatedUserMerch = this.updateUserMerchWithImageUrls(this.userMerch, this.images);
-          console.log(this.updatedUserMerch);
         }
       });
     });
@@ -108,44 +104,90 @@ export class UserCartComponent implements OnInit {
     });
   }
   
-  
-
-  checkout() {
-    
-  }
-
   removeFromCart(index: number): void {
-    const item = this.updatedUserMerch[index];
-    const quantity = parseInt(item[4]);
-  
-    if (quantity > 1) {
-      item[4] = (quantity - 1).toString();
-    } else {
-      this.updatedUserMerch.splice(index, 1);
-    }
-  
-    // Update the cart in the backend
-    const updatedCart = this.updatedUserMerch.map((item: any[]) => {
-      return Array(item[4]).fill(`${item[1]}-${item[2]}-${item[0]}`).join(', ');
-    }).join(', ');
-  
+    const itemToRemove = this.userMerch[index];
+    const quantityToRemove = parseInt(itemToRemove[4]);
+
+    let updatedItems: string[] = [];
+
+    this.userMerch.forEach((item: any[], i: number) => {
+      if (i !== index) {
+        // Add items that are not being removed
+        updatedItems.push(`${item[0]}-${item[1]}-${item[2]}`);
+      } else {
+        // Add the item being removed (quantity - 1) times
+        for (let j = 0; j < (quantityToRemove - 1); j++) {
+          updatedItems.push(`${item[0]}-${item[1]}-${item[2]}`);
+        }
+      }
+    });
+
+    const updatedCart = updatedItems.join(', ');
+
     const token: any = localStorage.getItem("jwt");
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     }); 
 
-    const requestOptions = {
-      headers: headers,
-      body: updatedCart
+    const userUpdatedCart = {
+      Merch: updatedCart,
     };
 
+
+    this.reqS.post('https://localhost:44341/api/cart/' + this.userId, userUpdatedCart, { headers }).subscribe(() => {
+      this.message = { type: 'success', text: 'Cart updated successfully' };
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);  
+        }, (error) => {
+          console.log('Error updating cart:', error);
+          this.message = { type: 'danger', text: 'Error updating cart' };
+    });    
+  }
+
+  checkout() {
+    const token: any = localStorage.getItem("jwt");
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }); 
+
+    const userUpdatedCart = {
+      Merch: "",
+    };
+
+    const now = new Date();
+    
+
+    const newOrder = {
+      OrderDate: now,
+      UserId: this.userId,
+      Merch: this.allcartMerch.merch,
+    }
+    console.log(newOrder);
+
+    const updateCartRequest = () => this.reqS.post('https://localhost:44341/api/cart/' + this.userId, userUpdatedCart, { headers });
+    const createOrderRequest = () => this.reqS.post('https://localhost:44341/api/orders/', newOrder, { headers });
+
+    createOrderRequest().pipe(
+      concatMap(() => updateCartRequest())
+    ).subscribe(
+      (response) => {
+        this.message = { type: 'success', text: 'Order placed successfully!' };
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      },
+      (error) => {
+        console.log('Error updating order and cart:', error);
+        this.message = { type: 'danger', text: 'Error placing order' };
+      });
+  }
+
   
-    this.reqS.put('https://localhost:44341/api/cart/' + this.userId, requestOptions).subscribe(() => {
-      console.log('Cart updated successfully');
-    }, error => {
-      console.error('Error updating cart', error);
-    });
+  onMessageClosed() {
+    this.message = null;
   }
   
 

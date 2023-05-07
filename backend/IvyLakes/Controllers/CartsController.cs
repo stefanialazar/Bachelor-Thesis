@@ -43,11 +43,11 @@ namespace IvyLakes.Controllers
             return Ok(carts);
         }
 
-        [HttpPut("api/cart/{userId}")]
+        [HttpPost("api/cart/{userId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> UpdateCart([FromRoute] Guid userId, [FromBody] CartsDTO updatedCartData)
+        public async Task<IActionResult> UpdateCart([FromRoute] Guid userId, [FromBody] UpdateCartsDTO updatedCartData)
         {
-            if (userId == Guid.Empty || string.IsNullOrEmpty(updatedCartData.Merch))
+            if (userId == Guid.Empty )
             {
                 return BadRequest();
             }

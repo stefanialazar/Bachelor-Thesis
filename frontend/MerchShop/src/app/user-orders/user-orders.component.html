@@ -30,11 +30,11 @@
     </div>
     
     <div *ngIf="!updatedUserMerch">
-      <div class="glass">
-        <img id="glass" src="../../assets/products/glass.png">
+        <div class="glass">
+            <img id="glass" src="../../assets/products/glass.png">
+        </div>
+        <app-messages [mesId]="'warning'" messageText="You have no orders. Visit merch!"></app-messages>
     </div>
     
-    <app-messages [mesId]="'warning'" messageText="You have no orders. Visit merch!"></app-messages>
-    </div>
     
 </div>

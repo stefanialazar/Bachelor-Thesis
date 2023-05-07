@@ -75,6 +75,7 @@ namespace IvyLakes
             services.AddControllers();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
