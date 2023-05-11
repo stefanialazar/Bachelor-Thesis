@@ -32,8 +32,8 @@
         </div>
         <div class="reddit-comment-footer">
           <div class="reddit-comment-score">Score: {{comment.score}}</div>
-          <button class="reddit-comment-like" (click)="likeComment(comment)"><i class="far fa-thumbs-up"></i></button>
-          <button class="reddit-comment-dislike" (click)="dislikeComment(comment)"><i class="far fa-thumbs-down"></i></button>
+          <button class="reddit-comment-like" (click)="likeComment(comment)" [ngClass]="{'liked': comment.userReaction === 1}"><i class="far fa-thumbs-up"></i></button>
+          <button class="reddit-comment-dislike" (click)="dislikeComment(comment)" [ngClass]="{'disliked': comment.userReaction === -1}"><i class="far fa-thumbs-down"></i></button>
         </div>
         <div class="reddit-comment-footer">
           <app-buttons class="reddit-comment-reply" [buttonText]="'reply'" (click)="toggleReplyForm(comment)"></app-buttons>
@@ -62,8 +62,8 @@
                 <img src="{{reply.commentImageUrl}}" class="reddit-comment-image">
                 <div class="reddit-comment-footer">
                   <div class="reddit-comment-score">Score: {{reply.score}}</div>
-                  <button class="reddit-comment-like" (click)="likeReply(reply)"><i class="far fa-thumbs-up"></i></button>
-                  <button class="reddit-comment-dislike" (click)="dislikeReply(reply)"><i class="far fa-thumbs-down"></i></button>
+                  <button class="reddit-comment-like" (click)="likeReply(reply)" [ngClass]="{'liked': reply.userReaction === 1}"><i class="far fa-thumbs-up"></i></button>
+                  <button class="reddit-comment-dislike" (click)="dislikeReply(reply)" [ngClass]="{'disliked': reply.userReaction === -1}"><i class="far fa-thumbs-down"></i></button>
                 </div>
                 
               </div>

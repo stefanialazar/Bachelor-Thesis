@@ -23,6 +23,7 @@ namespace IvyLakes.Data
         public virtual DbSet<CommentsReply> CommentsReplies { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Reacts> Reacts { get; set; }
         public virtual DbSet<SeriesSeason> SeriesSeasons { get; set; }
         public virtual DbSet<TvSeries> TvSeries { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -32,7 +33,6 @@ namespace IvyLakes.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=LSD\\SQLEXPRESS;Database=MerchShop;Trusted_Connection=True;");
             }
         }
@@ -172,6 +172,27 @@ namespace IvyLakes.Data
 
                 entity.Property(e => e.Merch)
                     .HasColumnName("Merch")
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<Reacts>(entity =>
+            {
+                entity.HasKey(e => e.ReactId);
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("UserId")
+                    .IsRequired();
+
+                entity.Property(e => e.CommentId)
+                   .HasColumnName("CommentId")
+                   .IsRequired(false);
+
+                entity.Property(e => e.ReplyId)
+                   .HasColumnName("ReplyId")
+                   .IsRequired(false);
+
+                entity.Property(e => e.Reaction)
+                    .HasColumnName("Reaction")
                     .IsRequired();
             });
 

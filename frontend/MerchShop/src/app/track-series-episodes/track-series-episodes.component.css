@@ -128,8 +128,6 @@
   align-items: center;
   margin: 40px;
 }
-
-
   
 .reddit-comment-author {
   font-size: 25px;
@@ -237,4 +235,14 @@
   font-weight: bold;
   font-family: Lora;
   margin-bottom: 10px;
+}
+
+.liked {
+  color: #088c34;
+  transform: scale(1.2);
+}
+
+.disliked {
+  color: #c82c1c;
+  transform: scale(1.2);
 }

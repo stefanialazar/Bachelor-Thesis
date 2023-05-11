@@ -70,6 +70,10 @@ export class UserPanelComponent implements OnInit {
     window.location.href = 'http://localhost:4200/welcome';
   }
 
+  deleteToken() {
+    localStorage.removeItem("jwt");
+  }
+
   async newProfilePicture(){
     const token: any= localStorage.getItem("jwt");
 

@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RequestService } from '../core/request.service';
 import { HttpHeaders } from '@angular/common/http';
 import jwt_decode from 'jwt-decode';
+import { Subject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-track-series-episodes',
   templateUrl: './track-series-episodes.component.html',
   styleUrls: ['./track-series-episodes.component.css']
 })
-export class TrackSeriesEpisodesComponent implements OnInit {
+export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
   seasonNumber!: number;
   episodeNumber!: number;
   comments: any;
@@ -17,10 +21,23 @@ export class TrackSeriesEpisodesComponent implements OnInit {
   userId: any;
   seriesId: any;
   message: { type: string, text: string } | null = null;
+  reacts: any;
+  repliesLoaded = new Subject<void>();
+  private subscription: Subscription = new Subscription;
 
   constructor(private route: ActivatedRoute, private reqS: RequestService,) {}
 
   ngOnInit(): void {
+    const token: any= localStorage.getItem("jwt");
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    if(token){
+      const tokenObject = this.decodeToken(token);
+      this.userId = tokenObject.id;
+    }
+
     this.route.params.subscribe((params) => {
       const seasonEpisode = params['seasonepisode'];
       this.seriesId = params['id'];
@@ -32,14 +49,39 @@ export class TrackSeriesEpisodesComponent implements OnInit {
         this.reqS.get('https://localhost:44341/api/comments/' + this.seriesId + '/season' + this.seasonNumber + 'episode' + this.episodeNumber).subscribe((res: any) => {
         this.comments = res.reverse();
         this.processReplies();
-         });
-      }
+        });
+
+        this.subscription = this.repliesLoaded.subscribe(() => {
+        if (this.userId) {
+          this.reqS.get('https://localhost:44341/api/reacts/' + this.userId, { headers }).subscribe((res: any) => {
+            this.reacts = res ? res : [];
+            this.processReacts();
+          });
+        }
+      });
+      
+    
+    }
     });
   }
 
+  ngOnDestroy(): void {
+    // unsubscribe when the component is destroyed
+    this.subscription.unsubscribe();
+  }
+
   processReplies() {
+    let count = 0; // count how many requests have been completed
     this.comments.forEach((element: any) => {
-      this.reqS.get('https://localhost:44341/api/comments/' + element.commentId + '/replies').subscribe((res: any) => {
+      this.reqS.get('https://localhost:44341/api/comments/' + element.commentId + '/replies').pipe(
+        finalize(() => {
+          count++;
+          // if all requests have been completed, emit an event from the subject
+          if (count === this.comments.length) {
+            this.repliesLoaded.next();
+          }
+        })
+      ).subscribe((res: any) => {
         if (res) {
           this.commentsReplies.push(res);
         } else {
@@ -51,9 +93,29 @@ export class TrackSeriesEpisodesComponent implements OnInit {
         }
       });
     });
-    console.log(this.comments);
-    console.log(this.commentsReplies);
   }
+
+  processReacts(): void {
+    this.reacts.forEach((react: any) => {
+      let target;
+      if (react.commentId !== null) {
+        // This is a reaction to a comment
+        target = this.comments.find((comment: any) => comment.commentId === react.commentId);
+      } else if (react.replyId !== null) {
+        // This is a reaction to a reply
+        console.log(this.commentsReplies.flat());
+
+        target = this.commentsReplies.flat().find((reply: any) => reply.replyId === react.replyId);
+      }
+      if (target) {
+        target.score += react.reaction;
+        if (react.userId === this.userId) {
+          target.userReaction = react.reaction;
+        }
+      }
+    });
+  }
+  
   
 
   toggleReplyForm(comment: any): void {
@@ -66,6 +128,7 @@ export class TrackSeriesEpisodesComponent implements OnInit {
 
   likeComment(comment: any): void {
     comment.score++;
+    console.log(this.reacts);
   }
   
   dislikeComment(comment: any): void {
@@ -89,8 +152,6 @@ export class TrackSeriesEpisodesComponent implements OnInit {
     });
 
     if(token){
-      const tokenObject = this.decodeToken(token);
-      this.userId = tokenObject.id;
 
       if (!commentBody.trim()) {
         console.log('Comment body cannot be empty.');
