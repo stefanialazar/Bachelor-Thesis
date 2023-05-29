@@ -23,6 +23,7 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { UserOrdersComponent } from './user-orders/user-orders.component';
     ConfirmationDialogComponent,
     EditUserComponent,
     UserCartComponent,
-    UserOrdersComponent],
+    UserOrdersComponent,
+    AdminComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

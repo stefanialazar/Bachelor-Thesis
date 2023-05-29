@@ -49,13 +49,14 @@ namespace IvyLakes.Controllers
                     var claim2 = new Claim("lastname", user.LastName);
                     var claim3 = new Claim("profilepicture", user.ProfilePicture);
                     var claim4 = new Claim("backgroundpicture", user.BackgroundPicture);
-
+                    var claim5 = new Claim("isadmin", user.IsAdmin.ToString());
 
                     userClaims.Add(claim);
                     userClaims.Add(claim1);
                     userClaims.Add(claim2);
                     userClaims.Add(claim3);
                     userClaims.Add(claim4);
+                    userClaims.Add(claim5);
                     var tokenOptions = new JwtSecurityToken(
                         issuer: "https://localhost:44341/",
                         audience: "https://localhost:4200/",
@@ -75,7 +76,7 @@ namespace IvyLakes.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(null);
+                return BadRequest(ex.Message);
             }
         }
     }

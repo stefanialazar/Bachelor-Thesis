@@ -13,6 +13,7 @@ import { TrackSeriesEpisodesComponent } from './track-series-episodes/track-seri
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserCartComponent } from './user-cart/user-cart.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'orders/:id', component: UserOrdersComponent},
   {path: 'user', component: UserPanelComponent},
   {path: 'welcome', component: WelcomeComponent},
+  {path: 'admin', component: AdminComponent},
   {path: '', redirectTo: 'welcome', pathMatch: 'full'}
 ];
 

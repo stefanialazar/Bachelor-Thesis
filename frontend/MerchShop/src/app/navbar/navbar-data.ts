@@ -35,4 +35,11 @@ export const navbarData = [
     label: 'Account',
     requiresUserId: false,
     },   
+    {
+    routeLink: 'admin',
+    icon: 'fal fa-lock',
+    label: 'Admin',
+    requiresUserId: true,
+    requiresAdmin: true,
+    },  
 ];

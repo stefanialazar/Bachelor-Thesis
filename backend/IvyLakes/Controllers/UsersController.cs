@@ -72,6 +72,7 @@ namespace IvyLakes.Controllers
                 ProfilePicture = "https://i.pinimg.com/564x/ad/11/88/ad1188b5d94c97c2e52acb3bf43c5ac9.jpg",
                 BackgroundPicture = "https://i.pinimg.com/564x/63/ba/ff/63baff25d2727d861d2bb882965a881d.jpg",
                 Points = 0,
+                IsAdmin = false,
                 RegistrationDate = DateTime.Now
             };
             user = await _userRepo.AddUser(userToAdd);

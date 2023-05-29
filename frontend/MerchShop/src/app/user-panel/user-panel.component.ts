@@ -18,6 +18,7 @@ export class UserPanelComponent implements OnInit {
   backgroundPicture: string = '';
   users: any;
   LoggedIn = true; 
+  isAdmin = false;
   message: { type: string, text: string } | null = null;
  
   constructor(private reqS: RequestService, private http: HttpClient) { }

@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit{
   navData = navbarData;
   users: any;
   LoggedIn = false;
+  isAdmin = false;
   userId: any;
   
   toggleCollapse(){
@@ -45,6 +46,9 @@ export class NavbarComponent implements OnInit{
         const tokenObject = this.decodeToken(token);
         this.userId = tokenObject.id;
         this.LoggedIn = true;
+        this.isAdmin = (tokenObject.isadmin.toLowerCase() === "true");
+        console.log(tokenObject.isadmin);
+        console.log(Boolean(this.isAdmin));
       }
     },
     error => {
