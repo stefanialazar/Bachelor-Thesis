@@ -7,6 +7,9 @@ using Microsoft.AspNet.OData;
 using System.Threading.Tasks;
 using IvyLakes.Data;
 using IvyLakes.DTOs;
+using IvyLakes.Data;
+using IvyLakes.DTOs;
+using IvyLakes.Models;
 
 namespace IvyLakes.Controllers { 
 
@@ -46,5 +49,35 @@ namespace IvyLakes.Controllers {
             return Ok(product);
         }
 
+        [HttpPost("api/images/add")]
+        public async Task<IActionResult> AddImage([FromBody] ImageDTO imageDTO)
+        {
+
+            // Find the series by title
+            TvSeries series = await _context.TvSeries.FirstOrDefaultAsync(s => s.SeriesTitle == imageDTO.SeriesTitle);
+
+            if (series == null)
+            {
+                return BadRequest("Series not found");
+            }
+
+            // Retrieve the maximum ImageID value from the existing records
+            int maxImageID = await _context.Images.MaxAsync(i => i.ImageId);
+
+            // Create the new series object
+            var newImage = new Image
+            {
+                ImageId = maxImageID + 1, // Set the new CommentID value
+                ImageUrl = imageDTO.ImageUrl,
+                SeriesId = series.SeriesId // Set the series Id
+
+            };
+
+            // Add the new series to the table
+            _context.Images.Add(newImage);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Image added" });
+        }
     }
 }

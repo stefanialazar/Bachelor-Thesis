@@ -1,1 +1,85 @@
-<p class="page">admin works!</p>
+<div class="page">
+    <div class="admin-container">
+        <h2>Add a new series</h2>
+        <div class="section">
+            <div class="form-group">
+                <div class="input-container">
+                  <label for="title">Series Title</label>
+                  <input type="text" id="title" name="title" [(ngModel)]="seriesTitle" required>
+                </div>
+                <div class="input-container">
+                    <label for="yearReleased">Year Released</label>
+                    <input type="text" id="yearReleased" name="yearReleased" [(ngModel)]="yearReleased" required>
+                </div>
+                <div class="input-container">
+                    <label for="imdbRating">IMDB Rating</label>
+                    <input type="text" id="imdbRating" name="imdbRating" [(ngModel)]="imdbRating" required>
+                </div>
+                <div class="input-container">
+                    <label for="genre">Genre</label>
+                    <input type="text" id="genre" name="genre" [(ngModel)]="genre" required>
+                </div>
+                <div class="input-container">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" [(ngModel)]="description" required>
+                </div>
+                <div class="input-container">
+                    <label for="streamingPlatforms">Streaming Platforms</label>
+                    <input type="text" id="streamingPlatforms" name="streamingPlatforms" [(ngModel)]="streamingPlatforms" required>
+                </div>
+                <div class="input-container">
+                    <label for="seriesImageUrl">Series Image URL</label>
+                    <input type="text" id="seriesImageUrl" name="seriesImageUrl" [(ngModel)]="seriesImageUrl" required>
+                </div>
+            </div>  
+            <div class="btn">
+                <app-buttons [buttonText]="'add serie'" (click)="addSerie(seriesTitle, yearReleased, imdbRating, genre, description, streamingPlatforms, seriesImageUrl)"></app-buttons>
+            </div>         
+        </div>
+    </div>
+
+    <div class="admin-container">
+        <h2>Add a season for series</h2>
+        <div class="section">
+            <div class="form-group">
+                <div class="input-container">
+                    <label for="ssSeriesTitle">Series Title</label>
+                    <input type="text" id="ssSeriesTitle" name="ssSeriesTitle" [(ngModel)]="ssSeriesTitle" required>
+                </div>
+                <div class="input-container">
+                    <label for="newSeason">Season</label>
+                    <input type="text" id="newSeason" name="newSeason" [(ngModel)]="newSeason" required>
+                </div>
+                <div class="input-container">
+                    <label for="newEpisode">Number of Episodes</label>
+                    <input type="text" id="newEpisode" name="newEpisode" [(ngModel)]="newEpisodes" required>
+                </div>
+            </div>  
+            <div class="btn">
+                <app-buttons [buttonText]="'add season'" (click)="addEpisodes(ssSeriesTitle, newSeason, newEpisodes)"></app-buttons>
+            </div>         
+        </div>
+    </div>
+
+    <div class="admin-container">
+        <h2>Add a new merch image</h2>
+        <div class="section">
+            <div class="form-group">
+                <div class="input-container">
+                    <label for="imageSeriesTitle">Series Title</label>
+                    <input type="text" id="imageSeriesTitle" name="imageSeriesTitle" [(ngModel)]="imageSeriesTitle" required>
+                </div>
+                <div class="input-container">
+                    <label for="productImageUrl">Product Image URL</label>
+                    <input type="text" id="productImageUrl" name="productImageUrl" [(ngModel)]="productImageUrl" required>
+                </div>
+            </div>  
+            <div class="btn">
+                <app-buttons [buttonText]="'add product'" (click)="addProduct(imageSeriesTitle, productImageUrl)"></app-buttons>
+            </div>         
+        </div>
+    </div>
+
+    <app-messages *ngIf="message" [mesId]="message.type" [messageText]="message.text" (messageClosed)="onMessageClosed()"></app-messages>
+    <br>
+</div>

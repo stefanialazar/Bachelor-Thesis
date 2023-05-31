@@ -35,12 +35,12 @@ export class ProductsComponent implements OnInit {
   }
 
   search(value: string): void {
-    console.log(this.series);
     if (this.allImages && this.allImages.length > 0) {
-      this.images = this.allImages.filter((val: { seriesTitle: string; }) =>
-        val.seriesTitle.toLowerCase().includes(value.toLowerCase())
+      this.images = this.allImages.filter((val: { seriesTitle: string; }) => 
+        val && val.seriesTitle && val.seriesTitle.toLowerCase().includes(value.toLowerCase())
       );
     }
   }
+  
     
 }

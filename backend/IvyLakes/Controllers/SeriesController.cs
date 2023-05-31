@@ -7,6 +7,9 @@ using Microsoft.AspNet.OData;
 using System.Threading.Tasks;
 using IvyLakes.Data;
 using IvyLakes.DTOs;
+using IvyLakes.Data;
+using IvyLakes.DTOs;
+using IvyLakes.Models;
 
 namespace IvyLakes.Controllers
 {
@@ -47,5 +50,31 @@ namespace IvyLakes.Controllers
             return Ok(series);
         }
 
+        [HttpPost("api/series/add")]
+        public async Task<IActionResult> AddSerie([FromBody] SeriesDTO seriesDTO)
+        {
+
+            // Retrieve the maximum SeriesID value from the existing records
+            int maxSeriesID = await _context.TvSeries.MaxAsync(c => c.SeriesId);
+
+            // Create the new series object
+            var newSerie = new TvSeries
+            {
+                SeriesId = maxSeriesID + 1, // Set the new CommentID value
+                SeriesTitle = seriesDTO.SeriesTitle,
+                YearReleased = seriesDTO.YearReleased,
+                ImdbRating = seriesDTO.ImdbRating,
+                Genre = seriesDTO.Genre,
+                Description = seriesDTO.Description,
+                StreamingPlatform = seriesDTO.StreamingPlatform,
+                SeriesImageUrl = seriesDTO.SeriesImageUrl
+            };
+
+            // Add the new series to the table
+            _context.TvSeries.Add(newSerie);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Series added" });
+        }
     }
 }

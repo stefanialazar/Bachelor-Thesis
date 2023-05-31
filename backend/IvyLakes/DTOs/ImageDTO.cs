@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace IvyLakes.DTOs
 {
-    public class SeriesSeasonsDTO
+    public class ImageDTO
     {
+        public string ImageUrl { get; set; }
         public string SeriesTitle { get; set; }
-        public int AiredSeason { get; set; }
-        public int AiredEpisodes { get; set; }
     }
 }

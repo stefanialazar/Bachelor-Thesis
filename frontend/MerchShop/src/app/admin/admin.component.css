@@ -6,7 +6,7 @@
     font-family: Lora;
 }
 
-.edit-profile-container {
+.admin-container {
     width: 100%;
     max-width: 80%;
     margin: 3% auto;
@@ -52,6 +52,10 @@
     display: flex;
     justify-content: center;
 }
+
+.input-container {
+    margin-top: 20px;
+  }
 
 .input-container input:focus {
   border: none;
