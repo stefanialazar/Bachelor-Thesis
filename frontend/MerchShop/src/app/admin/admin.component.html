@@ -80,6 +80,20 @@
         </div>
     </div>
 
+    <div class="admin-container">
+        <h2>All users</h2>
+        <div *ngFor="let u of users">
+            <div class="user">
+                Name : {{u.firstName}} {{u.lastName}}<br>
+                User Id : {{u.id}} <br>
+                Email : {{u.email}} <br>
+                Registration Date : {{u.registrationDate| date:'dd-MM-yyyy, h:mm a'}}
+            </div>
+            <br>
+        </div>
+        
+    </div>
+
     <app-messages *ngIf="message" [mesId]="message.type" [messageText]="message.text" (messageClosed)="onMessageClosed()"></app-messages>
     <br>
 </div>

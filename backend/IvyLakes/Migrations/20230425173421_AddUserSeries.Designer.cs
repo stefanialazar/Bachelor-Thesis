@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IvyLakes.Migrations
 {
-    [DbContext(typeof(MerchShopContext))]
+    [DbContext(typeof(SeriesSyncContext))]
     [Migration("20230425173421_AddUserSeries")]
     partial class AddUserSeries
     {

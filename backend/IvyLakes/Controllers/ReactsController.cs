@@ -16,9 +16,9 @@ namespace IvyLakes.Controllers
 {
     public class ReactsController : Controller
     {
-        private readonly MerchShopContext _context;
+        private readonly SeriesSyncContext _context;
 
-        public ReactsController(MerchShopContext context)
+        public ReactsController(SeriesSyncContext context)
         {
             _context = context;
         }

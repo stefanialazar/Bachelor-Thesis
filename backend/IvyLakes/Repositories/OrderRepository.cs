@@ -12,8 +12,8 @@ namespace IvyLakes.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
-        private readonly MerchShopContext _context;
-        public OrderRepository(MerchShopContext context)
+        private readonly SeriesSyncContext _context;
+        public OrderRepository(SeriesSyncContext context)
         {
             _context = context;
         }

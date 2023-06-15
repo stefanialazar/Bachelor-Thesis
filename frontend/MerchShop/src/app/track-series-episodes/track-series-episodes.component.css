@@ -164,12 +164,6 @@
 .reddit-comment-like i:hover, .reddit-comment-dislike i:hover {
   transform: scale(1.2);
 }
-  
-.reddit-comment-reply {
-  padding-left: 15px;
-  background-color: #a5af96;
-  border-radius: 10px;
-}
 
 .reddit-comment-reply-body {
   display: flex;
@@ -217,12 +211,6 @@
   border-radius: 10px;
 }
 
-.reddit-reply-button {
-  padding-left: 15px;
-  background-color: #a5af96;
-  border-radius: 10px;
-}
-
 .reddit-reply-footer {
   display: flex;
   justify-content: center;
@@ -245,4 +233,22 @@
 .disliked {
   color: #c82c1c;
   transform: scale(1.2);
+}
+
+.blur {
+  filter: blur(10px);
+  pointer-events: none;
+}
+.spoiler-warning{
+  font-size: 20px;
+  text-indent: 40px;
+}
+
+.spoiler-button {
+  background-color: #a5af96;
+  margin-left:100px;
+}
+
+.spoiler-div {
+  text-align: center;
 }

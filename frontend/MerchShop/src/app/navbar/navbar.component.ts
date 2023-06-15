@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit{
         const tokenObject = this.decodeToken(token);
         this.userId = tokenObject.id;
         this.LoggedIn = true;
-        this.isAdmin = (tokenObject.isadmin.toLowerCase() === "true");
+        this.isAdmin = (tokenObject.isadmin == 1);
         console.log(tokenObject.isadmin);
         console.log(Boolean(this.isAdmin));
       }

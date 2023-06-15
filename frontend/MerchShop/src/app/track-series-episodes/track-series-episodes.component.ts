@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RequestService } from '../core/request.service';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import jwt_decode from 'jwt-decode';
 import { Subject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
@@ -23,9 +23,11 @@ export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
   message: { type: string, text: string } | null = null;
   reacts: any;
   repliesLoaded = new Subject<void>();
+  users: any;
+  isAdmin: any;
   private subscription: Subscription = new Subscription;
 
-  constructor(private route: ActivatedRoute, private reqS: RequestService,) {}
+  constructor(private route: ActivatedRoute, private reqS: RequestService, private http: HttpClient) {}
 
   ngOnInit(): void {
     const token: any= localStorage.getItem("jwt");
@@ -36,6 +38,7 @@ export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
     if(token){
       const tokenObject = this.decodeToken(token);
       this.userId = tokenObject.id;
+      this.isAdmin = tokenObject.isadmin;
     }
 
     this.route.params.subscribe((params) => {
@@ -48,6 +51,7 @@ export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
         this.episodeNumber = parseInt(matches[2], 10);
         this.reqS.get('https://localhost:44341/api/comments/' + this.seriesId + '/season' + this.seasonNumber + 'episode' + this.episodeNumber).subscribe((res: any) => {
         this.comments = res.reverse();
+        console.log(this.comments);
         this.processReplies();
         });
 
@@ -103,8 +107,6 @@ export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
         target = this.comments.find((comment: any) => comment.commentId === react.commentId);
       } else if (react.replyId !== null) {
         // This is a reaction to a reply
-        console.log(this.commentsReplies.flat());
-
         target = this.commentsReplies.flat().find((reply: any) => reply.replyId === react.replyId);
       }
       if (target) {
@@ -124,6 +126,58 @@ export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
 
   toggleReplies(comment: any): void {
     comment.showReplies = !comment.showReplies;
+  }
+
+  toggleSpoilerComment(comment: any): void {
+    comment.hidden = !comment.hidden;
+  }
+
+  markSpoilerComment(comment: any): void {
+    const token: any= localStorage.getItem("jwt");
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+
+    const updateHidden = {
+      CommentId: comment.commentId,
+      Hidden: 1,
+    };
+
+    console.log(comment.commentId)
+    this.http.post('https://localhost:44341/api/comments/change-hidden', updateHidden,  { headers }).subscribe(() => {
+    comment.hidden = 1;
+    this.message = { type: 'success', text: 'Comment status updated successfully' };
+      setTimeout(() => {
+        window.location.reload();
+      }, 5000);
+    }, (error) => {
+      console.log('Error updating comment status:', error);
+      this.message = { type: 'danger', text: 'Error updating comment status' };
+    });
+  }
+
+
+  toggleSpoilerReply(reply: any): void {
+    reply.hidden = !reply.hidden;
+  }
+
+  markSpoilerReply(reply: any): void {
+    const token: any= localStorage.getItem("jwt");
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+     this.http.post('https://localhost:44341/api/comments/reply/change-hidden', { ReplyId: reply.replyId, Hidden: 1 }, { headers }).subscribe(() => {
+      reply.hidden = 1;
+      this.message = { type: 'success', text: 'Comment status updated successfully' };
+      setTimeout(() => {
+        window.location.reload();
+      }, 5000);
+    }, (error) => {
+      console.log('Error updating comment status:', error);
+      this.message = { type: 'danger', text: 'Error updating comment status' };
+    });
   }
 
   likeComment(comment: any): void {

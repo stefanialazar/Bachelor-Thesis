@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNet.OData;
-using System.Threading.Tasks;
 using IvyLakes.Data;
 using IvyLakes.DTOs;
 using IvyLakes.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IvyLakes.Controllers
 {
     [ApiController]
     public class CommentsRepliesController : Controller
     {
-        private readonly MerchShopContext _context;
+        private readonly SeriesSyncContext _context;
 
-        public CommentsRepliesController(MerchShopContext context)
+        public CommentsRepliesController(SeriesSyncContext context)
         {
             _context = context;
         }
@@ -35,7 +35,8 @@ namespace IvyLakes.Controllers
                     r.CommentId,
                     r.CommentBody,
                     r.CommentImageUrl,
-                    r.Score
+                    r.Score,
+                    r.Hidden
                 })
                 .ToListAsync();
 
@@ -62,7 +63,8 @@ namespace IvyLakes.Controllers
                 CommentId = createReplyDTO.CommentId,
                 CommentBody = createReplyDTO.CommentBody,
                 CommentImageUrl = createReplyDTO.CommentImageUrl,
-                Score = 0
+                Score = 0,
+                Hidden = 0
             };
 
             // Add the new reply to the table
@@ -71,5 +73,27 @@ namespace IvyLakes.Controllers
 
             return CreatedAtAction(nameof(GetCommentReplies), new { commentId = newReply.CommentId }, newReply);
         }
+
+        [HttpPost("api/comments/reply/change-hidden")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> HideCommentReply([FromBody] HideCommentDTO hideCommentDTO)
+        {
+            // Find the reply in the database
+            var reply = await _context.CommentsReplies.FindAsync(hideCommentDTO.ReplyId);
+
+            if (reply == null)
+            {
+                return NotFound();
+            }
+
+            // Set the Hidden value
+            reply.Hidden = hideCommentDTO.Hidden;
+
+            // Save the changes
+            await _context.SaveChangesAsync();
+
+            return Ok(reply);
+        }
+
     }
 }

@@ -22,10 +22,22 @@ export class AdminComponent implements OnInit {
   ssSeriesTitle = '';
   newSeason = 0;
   newEpisodes = 0;
+  users: any;
 
   constructor(private route: ActivatedRoute, private reqS: RequestService, private http: HttpClient) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const token: any= localStorage.getItem("jwt");
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+    this.http.get('https://localhost:44341/api/users', { headers: headers }).subscribe((res: any) => {
+      this.users = res;
+      console.log(this.users);
+    });
+  }
 
   addSerie(title: string, year: number, imdb: number, genre: string, description: string, platforms: string, imageUrl: string) {
     const token: any = localStorage.getItem("jwt");

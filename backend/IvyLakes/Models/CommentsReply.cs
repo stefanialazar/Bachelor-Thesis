@@ -13,6 +13,7 @@ namespace IvyLakes.Models
         public string CommentBody { get; set; }
         public string CommentImageUrl { get; set; }
         public int? Score { get; set; }
+        public int? Hidden { get; set; }
 
         public virtual Comment Comment { get; set; }
         public virtual User User { get; set; }

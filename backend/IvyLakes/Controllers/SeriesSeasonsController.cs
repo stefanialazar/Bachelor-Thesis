@@ -1,24 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNet.OData;
-using System.Threading.Tasks;
-using IvyLakes.Data;
-using IvyLakes.DTOs;
 using IvyLakes.Data;
 using IvyLakes.DTOs;
 using IvyLakes.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace IvyLakes.Controllers
 {
     [ApiController]
     public class SeriesSeasonsController : Controller
     {
-        private readonly MerchShopContext _context;
+        private readonly SeriesSyncContext _context;
 
-        public SeriesSeasonsController(MerchShopContext context)
+        public SeriesSeasonsController(SeriesSyncContext context)
         {
             _context = context;
         }
@@ -57,6 +56,7 @@ namespace IvyLakes.Controllers
         }
 
         [HttpPost("api/series-seasons/add")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> AddSeriesSeasons([FromBody] SeriesSeasonsDTO ssDTO)
         {
 

@@ -14,10 +14,10 @@ namespace IvyLakes.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly MerchShopContext _context;
+        private readonly SeriesSyncContext _context;
         private readonly IOrderRepository _orderRepository;
 
-        public OrdersController(MerchShopContext context, IOrderRepository orderRepository)
+        public OrdersController(SeriesSyncContext context, IOrderRepository orderRepository)
         {
             _context = context;
             _orderRepository = orderRepository;

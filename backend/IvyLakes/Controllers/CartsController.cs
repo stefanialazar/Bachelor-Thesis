@@ -18,7 +18,7 @@ namespace IvyLakes.Controllers
     {
 
         private readonly ICartRepository _cartRepo;
-        public CartsController(ICartRepository cartRepo, MerchShopContext context)
+        public CartsController(ICartRepository cartRepo, SeriesSyncContext context)
         {
             _cartRepo = cartRepo;
         }

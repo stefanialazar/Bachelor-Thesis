@@ -12,8 +12,8 @@ namespace IvyLakes.Repositories
 {
     public class CartRepository : ICartRepository
     {
-        private readonly MerchShopContext _context;
-        public CartRepository(MerchShopContext context)
+        private readonly SeriesSyncContext _context;
+        public CartRepository(SeriesSyncContext context)
         {
             _context = context;
         }

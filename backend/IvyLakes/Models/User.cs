@@ -29,7 +29,7 @@ namespace IvyLakes.Models
         public string BackgroundPicture { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
-        public bool IsAdmin { get; set; }
+        public int IsAdmin { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<CommentsReply> CommentsReplies { get; set; }

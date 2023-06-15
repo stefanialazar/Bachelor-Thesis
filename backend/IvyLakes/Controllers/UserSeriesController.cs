@@ -20,9 +20,9 @@ namespace IvyLakes.Controllers
     [ApiController]
     public class UserSeriesController : Controller
     {
-        private readonly MerchShopContext _context;
+        private readonly SeriesSyncContext _context;
 
-        public UserSeriesController( MerchShopContext context)
+        public UserSeriesController( SeriesSyncContext context)
         {
             _context = context;
         }

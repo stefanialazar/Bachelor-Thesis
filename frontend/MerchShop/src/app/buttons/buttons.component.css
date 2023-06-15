@@ -3,6 +3,10 @@
     color: #bec5b3;
 }
 
+.comment-button {
+  background-color: #bec5b3;
+}
+
 .button-container {
     position: relative;
     display: inline-block;

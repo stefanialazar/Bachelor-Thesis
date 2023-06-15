@@ -35,7 +35,7 @@ namespace IvyLakes
 
             services.AddControllersWithViews();
            
-            services.AddDbContext<MerchShopContext>(options =>
+            services.AddDbContext<SeriesSyncContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MerchShopContext")));
             services.AddSwaggerGen(c =>
             {

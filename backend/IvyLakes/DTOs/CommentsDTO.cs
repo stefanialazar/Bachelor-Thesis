@@ -15,6 +15,7 @@ namespace IvyLakes.DTOs
         public string CommentBody { get; set; }
         public string CommentImageURL { get; set; }
         public int Score { get; set; }
+        public int Hidden { get; set; }
     }
 }
 

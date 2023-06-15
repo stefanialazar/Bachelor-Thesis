@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNet.OData;
-using System.Threading.Tasks;
 using IvyLakes.Data;
 using IvyLakes.DTOs;
 using IvyLakes.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IvyLakes.Controllers
 {
     [ApiController]
     public class CommentsController : Controller
     {
-        private readonly MerchShopContext _context;
-        public CommentsController(MerchShopContext context)
+        private readonly SeriesSyncContext _context;
+        public CommentsController(SeriesSyncContext context)
         {
             _context = context;
         }
@@ -58,7 +58,8 @@ namespace IvyLakes.Controllers
                     c.EpisodeNumber,
                     c.CommentBody,
                     c.CommentImageUrl,
-                    c.Score
+                    c.Score,
+                    c.Hidden
                 })
                 .ToListAsync();
 
@@ -87,7 +88,8 @@ namespace IvyLakes.Controllers
                 EpisodeNumber = createCommentDTO.EpisodeNumber,
                 CommentBody = createCommentDTO.CommentBody,
                 CommentImageUrl = createCommentDTO.CommentImageURL,
-                Score = 0
+                Score = 0,
+                Hidden = 0
             };
 
             // Add the new comment to the table
@@ -97,6 +99,26 @@ namespace IvyLakes.Controllers
             return CreatedAtAction(nameof(GetComment), new { commentId = newComment.CommentId }, newComment);
         }
 
+        [HttpPost("api/comments/change-hidden")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> HideComment([FromBody] HideCommentDTO hideCommentDTO)
+        {
+            // Find the comment in the database
+            var comment = await _context.Comments.FindAsync(hideCommentDTO.CommentId);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            // Set the Hidden value
+            comment.Hidden = hideCommentDTO.Hidden;
+
+            // Save the changes
+            await _context.SaveChangesAsync();
+
+            return Ok(comment);
+        }
 
     }
 }

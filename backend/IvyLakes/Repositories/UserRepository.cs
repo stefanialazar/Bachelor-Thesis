@@ -11,8 +11,8 @@ namespace IvyLakes.Repositories
 {
     public class UserRepository: IUserRepository
     {
-        private readonly MerchShopContext _context;
-        public UserRepository(MerchShopContext context)
+        private readonly SeriesSyncContext _context;
+        public UserRepository(SeriesSyncContext context)
         {
             _context = context;
         }

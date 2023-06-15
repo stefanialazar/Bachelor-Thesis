@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IvyLakes.Migrations
 {
-    [DbContext(typeof(MerchShopContext))]
+    [DbContext(typeof(SeriesSyncContext))]
     partial class MerchShopContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

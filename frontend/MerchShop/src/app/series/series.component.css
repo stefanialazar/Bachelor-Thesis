@@ -28,8 +28,8 @@ ul {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 15px;
-  list-style: none; /* Remove the default list bullet points */
-  padding: 0; /* Remove the default list padding */
+  list-style: none;
+  padding: 0; 
 }
 
 .image-gallery > li {
@@ -39,17 +39,14 @@ ul {
   width: 285px;
 }
 
-img {
-  border: 10px solid #182d28;
-  border-radius: 15px;
-}
-
 .image-gallery::after {
   content: "";
   flex-grow: 999;
 }
 
 .image-gallery li img {
+  border: 10px solid #182d28;
+  border-radius: 15px;
   object-fit: cover;
   width: 100%;
   height: 100%;
@@ -144,13 +141,91 @@ span{
 }
 
 @media (max-width: 1100px) {
+  .search{
+    position: relative;
+    top: -90px;
+    padding-bottom: 60px;
+  }
   .image-gallery {
     grid-template-columns: repeat(2, 1fr);
+    margin-left: 50px;
   }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 900px) {
+  .page{
+    margin-left: 15px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-top: 7%;
+  }
+  .search{
+    position: relative;
+    top: -90px;
+    left: 30px;
+    padding-bottom: 60px;
+  }
+  #box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 105%;
+    height: 60px;
+    color: #bec5b3;
+    font-size: 1.8rem;
+  }
+  .image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 770px) {
+  .page{
+    margin-top: 7%;
+  }
+  .search{
+    position: relative;
+    top: -70px;
+    left: 50px;
+    padding-bottom: 120px;
+  }
+  #box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110%;
+    height: 60px;
+    color: #bec5b3;
+    font-size: 1.8rem;
+  }
+  .image-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left:20px;
+  }
+}
+
+@media (max-width: 450px) {
+  .page{
+    margin-top: 7%;
+  }
+  .search{
+    position: relative;
+    top: -70px;
+    left: 50px;
+    padding-bottom: 120px;
+  }
+  #box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140%;
+    height: 60px;
+    color: #bec5b3;
+    font-size: 1.8rem;
+  }
   .image-gallery {
     grid-template-columns: repeat(1, 1fr);
+    margin-left:0;
   }
 }

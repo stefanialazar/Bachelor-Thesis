@@ -7,13 +7,13 @@ using IvyLakes.Models;
 
 namespace IvyLakes.Data
 {
-    public partial class MerchShopContext : DbContext
+    public partial class SeriesSyncContext : DbContext
     {
-        public MerchShopContext()
+        public SeriesSyncContext()
         {
         }
 
-        public MerchShopContext(DbContextOptions<MerchShopContext> options)
+        public SeriesSyncContext(DbContextOptions<SeriesSyncContext> options)
             : base(options)
         {
         }

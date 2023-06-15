@@ -20,8 +20,8 @@ namespace IvyLakes.Controllers
     {
         private readonly IUserRepository _userRepo;
         private readonly ICartRepository _cartRepo;
-        private readonly MerchShopContext _context;
-        public UsersController(IUserRepository userRepo, ICartRepository cartRepo, MerchShopContext context)
+        private readonly SeriesSyncContext _context;
+        public UsersController(IUserRepository userRepo, ICartRepository cartRepo, SeriesSyncContext context)
         {
             _userRepo = userRepo;
             _cartRepo = cartRepo;
@@ -72,7 +72,7 @@ namespace IvyLakes.Controllers
                 ProfilePicture = "https://i.pinimg.com/564x/ad/11/88/ad1188b5d94c97c2e52acb3bf43c5ac9.jpg",
                 BackgroundPicture = "https://i.pinimg.com/564x/63/ba/ff/63baff25d2727d861d2bb882965a881d.jpg",
                 Points = 0,
-                IsAdmin = false,
+                IsAdmin = 0,
                 RegistrationDate = DateTime.Now
             };
             user = await _userRepo.AddUser(userToAdd);
