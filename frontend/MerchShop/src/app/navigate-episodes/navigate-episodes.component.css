@@ -2,12 +2,16 @@
     overflow: hidden;
     background-color: #182d28;
     position: fixed;
-    top: 0;
-    left:30px;
+    top: 0px;
+    left: 0px;
     width: 100%; 
     text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 50px;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
 }
   
   .navbar a {
@@ -16,13 +20,49 @@
     text-decoration: none;
     font-size: 17px;
     transition: all 0.5s ease;
-    
   }
   
   .navbar a:hover {
     background: #bec5b3;
     color: #182d28;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     border-radius: 50px;
   }
+
+  @media (max-width: 950px) {
+    .navbar {
+        left: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        flex-direction: column;
+    }
+  
+    .navbar a {
+        padding: 10px 10px;
+        font-size: 15px;
+    }
+  
+    .navbar a:hover {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+  @media (max-width: 450px) {
+    .navbar {
+        left: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+  
+    .navbar a {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+  
+    .navbar a:hover {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

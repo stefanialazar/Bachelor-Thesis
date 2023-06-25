@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 0;
 }
 
 .reddit-header {
@@ -252,3 +253,146 @@
 .spoiler-div {
   text-align: center;
 }
+
+@media (max-width: 950px) {
+  .page {
+    padding-top: 150px;
+  }
+}
+
+@media (max-width: 650px) {
+  .page {
+    margin-left: 55px;
+    padding-top: 150px;
+  }
+  
+  .reddit-title {
+    font-size: 24px;
+  }
+  
+  .reddit-body {
+    width: 80%;
+  }
+  
+  .reddit-post {
+    margin-bottom: 50px;
+  }
+  
+  .reddit-post-body {
+    padding: 15px;
+  }
+  
+  .reddit-post-title {
+    font-size: 18px;
+  }
+  
+  .reddit-comment-label {
+    font-size: 14px;
+  }
+  
+  .reddit-comment-input {
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  .reddit-comment {
+    padding: 15px;
+  }
+  
+  .reddit-comment-author {
+    font-size: 16px;
+  }
+  
+  .reddit-comment-score {
+    font-size: 14px;
+  }
+  
+  .reddit-comment-like i, .reddit-comment-dislike i {
+    font-size: 20px;
+  }
+  
+  .reddit-comment-reply-author {
+    font-size: 12px;
+  }
+  
+  .reddit-reply-author {
+    font-size: 16px;
+  }
+  
+  .spoiler-warning {
+    font-size: 16px;
+  }
+  
+  .spoiler-button {
+    margin-left: 15px;
+  }
+}
+
+@media (max-width: 450px) {
+  .page {
+    margin-left: 75px;
+    padding-top: 150px;
+  }
+  
+  .reddit-title {
+    font-size: 20px;
+  }
+  
+  .reddit-body {
+    width: 150%;
+  }
+  
+  .reddit-post {
+    margin-bottom: 50px;
+  }
+  
+  .reddit-post-body {
+    padding: 15px;
+  }
+  
+  .reddit-post-title {
+    font-size: 18px;
+  }
+  
+  .reddit-comment-label {
+    font-size: 14px;
+  }
+  
+  .reddit-comment-input {
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  .reddit-comment {
+    padding: 15px;
+  }
+  
+  .reddit-comment-author {
+    font-size: 16px;
+  }
+  
+  .reddit-comment-score {
+    font-size: 14px;
+  }
+  
+  .reddit-comment-like i, .reddit-comment-dislike i {
+    font-size: 20px;
+  }
+  
+  .reddit-comment-reply-author {
+    font-size: 12px;
+  }
+  
+  .reddit-reply-author {
+    font-size: 16px;
+  }
+  
+  .spoiler-warning {
+    font-size: 16px;
+  }
+  
+  .spoiler-button {
+    margin-left: 15px;
+  }
+}
+
