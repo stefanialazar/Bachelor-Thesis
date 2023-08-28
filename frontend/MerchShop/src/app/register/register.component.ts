@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
     const firstName = (<HTMLInputElement>document.getElementById("firstName")).value;
   
     if (!this.isValidEmail(email) || !this.isValidPassword(password) || !this.isValidName(firstName) || !this.isValidName(lastName)) {
+      console.log(this.isValidEmail(email), this.isValidPassword(password), this.isValidName(firstName), this.isValidName(lastName))
       this.message = { type: 'danger', text: 'Invalid input. Please make sure all fields meet the requirements.' };
       return;
     }

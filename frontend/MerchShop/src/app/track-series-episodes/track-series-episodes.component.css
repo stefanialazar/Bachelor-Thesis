@@ -166,6 +166,14 @@
   transform: scale(1.2);
 }
 
+.reddit-comment-like.liked {
+  color: rgb(26, 142, 26);
+}
+
+.reddit-comment-dislike.disliked {
+  color: rgb(170, 38, 38);
+}
+
 .reddit-comment-reply-body {
   display: flex;
   flex-direction: column;

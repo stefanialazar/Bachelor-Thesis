@@ -25,6 +25,7 @@ export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
   repliesLoaded = new Subject<void>();
   users: any;
   isAdmin: any;
+  LoggedIn = false; 
   private subscription: Subscription = new Subscription;
 
   constructor(private route: ActivatedRoute, private reqS: RequestService, private http: HttpClient) {}
@@ -39,33 +40,32 @@ export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
       const tokenObject = this.decodeToken(token);
       this.userId = tokenObject.id;
       this.isAdmin = tokenObject.isadmin;
+      this.LoggedIn = true; // Set LoggedIn to true when the token is present and valid
     }
 
-    this.route.params.subscribe((params) => {
-      const seasonEpisode = params['seasonepisode'];
-      this.seriesId = params['id'];
-      const matches = seasonEpisode.match(/season(\d+)episode(\d+)/i);
+      this.route.params.subscribe((params) => {
+        const seasonEpisode = params['seasonepisode'];
+        this.seriesId = params['id'];
+        const matches = seasonEpisode.match(/season(\d+)episode(\d+)/i);
 
-      if (matches) {
-        this.seasonNumber = parseInt(matches[1], 10);
-        this.episodeNumber = parseInt(matches[2], 10);
-        this.reqS.get('https://localhost:44341/api/comments/' + this.seriesId + '/season' + this.seasonNumber + 'episode' + this.episodeNumber).subscribe((res: any) => {
-        this.comments = res.reverse();
-        console.log(this.comments);
-        this.processReplies();
-        });
-
-        this.subscription = this.repliesLoaded.subscribe(() => {
-        if (this.userId) {
-          this.reqS.get('https://localhost:44341/api/reacts/' + this.userId, { headers }).subscribe((res: any) => {
-            this.reacts = res ? res : [];
-            this.processReacts();
+        if (matches) {
+          this.seasonNumber = parseInt(matches[1], 10);
+          this.episodeNumber = parseInt(matches[2], 10);
+          this.reqS.get('https://localhost:44341/api/comments/' + this.seriesId + '/season' + this.seasonNumber + 'episode' + this.episodeNumber).subscribe((res: any) => {
+          this.comments = res.reverse();
+          console.log(this.comments);
+          this.processReplies();
           });
-        }
-      });
-      
-    
-    }
+
+          this.subscription = this.repliesLoaded.subscribe(() => {
+          if (this.userId) {
+            this.reqS.get('https://localhost:44341/api/reacts/' + this.userId, { headers }).subscribe((res: any) => {
+              this.reacts = res ? res : [];
+              this.processReacts();
+            });
+          }
+        });
+      }
     });
   }
 
@@ -180,21 +180,49 @@ export class TrackSeriesEpisodesComponent implements OnInit, OnDestroy {
     });
   }
 
-  likeComment(comment: any): void {
-    comment.score++;
-    console.log(this.reacts);
+  likeComment(comment: any) {
+    // If the user has previously disliked the comment, decrement the score
+    if (comment.userReaction === -1) {
+      comment.score++;
+    }
+    
+    // If the user has already liked the comment, toggle the like off and decrement the score
+    if (comment.userReaction === 1) {
+      comment.userReaction = 0;
+      comment.score--;
+    } else {
+      // Otherwise, set the userReaction to liked and increment the score
+      comment.userReaction = 1;
+      comment.score++;
+    }
   }
   
-  dislikeComment(comment: any): void {
-    comment.score--;
+  dislikeComment(comment: any) {
+    // If the user has previously liked the comment, decrement the score
+    if (comment.userReaction === 1) {
+      comment.score--;
+    }
+    
+    // If the user has already disliked the comment, toggle the dislike off and increment the score
+    if (comment.userReaction === -1) {
+      comment.userReaction = 0;
+      comment.score++;
+    } else {
+      // Otherwise, set the userReaction to disliked and decrement the score
+      comment.userReaction = -1;
+      comment.score--;
+    }
   }
+  
 
   likeReply(reply: any): void {
     reply.score++;
+    reply.userReaction = 1;
   }
   
   dislikeReply(reply: any): void {
     reply.score--;
+    reply.userReaction = -1;
   }
 
   async submitComment(commentBody: string, commentImageUrl: string): Promise<void> {
